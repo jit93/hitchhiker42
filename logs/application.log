@@ -1,0 +1,15 @@
+2016-11-06 16:41:03,247 - [INFO] - from play in pool-4-thread-3 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2016-11-06 16:42:40,897 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/beers
+
+2016-11-06 16:42:41,636 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2016-11-06 16:47:38,426 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost/beers
+
+2016-11-06 16:47:38,482 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
