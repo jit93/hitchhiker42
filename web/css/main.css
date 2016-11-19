@@ -1,0 +1,51 @@
+body {
+	min-width: 1000px;
+}
+
+/* Main Content Panel CSS */
+
+.main-content {
+	background-color: black;
+	float: left;
+	width: 80%;
+}
+
+#map {
+	width:100%;
+	height:500px
+}
+
+.header {
+	text-align: center;
+	height: 60px;
+}
+
+.main-header {
+	background-color: #32CD32
+}
+
+.hitchhiker-text {
+	font-size: 20px;
+	display: inline-block;
+}
+
+/* Left Navigation Bar CSS */
+.left-header {
+	background-color: red;
+}
+
+.left-content {
+	width: 20%;
+	float: left;
+	background-color: gray;
+}
+
+.sign-in {
+	height: 60px;
+	display: inline-block;
+}
+
+.nav-boxes {
+	height: 500px;
+}
+
