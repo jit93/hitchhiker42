@@ -1,15 +1,205 @@
-2016-11-06 16:41:03,247 - [INFO] - from play in pool-4-thread-3 
+2016-11-19 15:56:50,220 - [INFO] - from play in pool-5-thread-6 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2016-11-06 16:42:40,897 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:postgresql://localhost/beers
+2016-11-19 15:57:43,961 - [ERROR] - from com.jolbox.bonecp.hooks.AbstractConnectionHook in play-internal-execution-context-1 
+Failed to obtain initial connection Sleeping for 0ms and trying again. Attempts left: 0. Exception: null.Message:FATAL: password authentication failed for user "catriona316"
 
-2016-11-06 16:42:41,636 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
+2016-11-19 15:57:43,970 - [ERROR] - from application in New I/O worker #2 
 
-2016-11-06 16:47:38,426 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:postgresql://localhost/beers
 
-2016-11-06 16:47:38,482 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
+! @725g2memo - Internal server error, for (GET) [/] ->
+
+play.api.Configuration$$anon$1: Configuration error[Cannot connect to database [default]]
+	at play.api.Configuration$.play$api$Configuration$$configError(Configuration.scala:94) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Configuration.reportError(Configuration.scala:743) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:247) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.map(List.scala:274) ~[scala-library-2.11.1.jar:na]
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "catriona316"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:398) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:173) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:64) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:136) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:29) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:21) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:31) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.makeConnection(Driver.java:397) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.connect(Driver.java:267) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at java.sql.DriverManager.getConnection(DriverManager.java:571) ~[na:1.7.0_121]
+	at java.sql.DriverManager.getConnection(DriverManager.java:215) ~[na:1.7.0_121]
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	... 26 common frames omitted
+
+2016-11-19 15:57:43,970 - [ERROR] - from application in New I/O worker #1 
+
+
+! @725g2memo - Internal server error, for (GET) [/] ->
+
+play.api.Configuration$$anon$1: Configuration error[Cannot connect to database [default]]
+	at play.api.Configuration$.play$api$Configuration$$configError(Configuration.scala:94) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Configuration.reportError(Configuration.scala:743) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:247) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.map(List.scala:274) ~[scala-library-2.11.1.jar:na]
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "catriona316"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:398) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:173) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:64) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:136) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:29) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:21) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:31) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.makeConnection(Driver.java:397) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.connect(Driver.java:267) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at java.sql.DriverManager.getConnection(DriverManager.java:571) ~[na:1.7.0_121]
+	at java.sql.DriverManager.getConnection(DriverManager.java:215) ~[na:1.7.0_121]
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	... 26 common frames omitted
+
+2016-11-19 15:57:44,298 - [ERROR] - from application in New I/O worker #2 
+
+
+! @725g2memo - Internal server error, for (GET) [/favicon.ico] ->
+
+play.api.Configuration$$anon$1: Configuration error[Cannot connect to database [default]]
+	at play.api.Configuration$.play$api$Configuration$$configError(Configuration.scala:94) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Configuration.reportError(Configuration.scala:743) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:247) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.map(List.scala:274) ~[scala-library-2.11.1.jar:na]
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "catriona316"
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:398) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:173) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:64) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:136) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:29) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:21) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:31) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.makeConnection(Driver.java:397) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at org.postgresql.Driver.connect(Driver.java:267) ~[postgresql-9.2-1004-jdbc4.jar:na]
+	at java.sql.DriverManager.getConnection(DriverManager.java:571) ~[na:1.7.0_121]
+	at java.sql.DriverManager.getConnection(DriverManager.java:215) ~[na:1.7.0_121]
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120) ~[bonecp-0.8.0.RELEASE.jar:na]
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	... 26 common frames omitted
+
+2016-11-19 15:59:30,726 - [WARN] - from play in pool-5-thread-6 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.6.jar:2.3.6]
+	at play.core.server.NettyServer.stop(NettyServer.scala:158) [play_2.11-2.3.6.jar:2.3.6]
+	at play.PlayRun$$anon$3.close(PlayRun.scala:333) [sbt-plugin-2.3.6.jar:2.3.6]
+	at play.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3.apply(PlayRun.scala:151) [sbt-plugin-2.3.6.jar:2.3.6]
+	at play.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3.apply(PlayRun.scala:96) [sbt-plugin-2.3.6.jar:2.3.6]
+	at scala.Function1$$anonfun$compose$1.apply(Function1.scala:47) [scala-library.jar:0.13.5]
+	at sbt.$tilde$greater$$anonfun$$u2219$1.apply(TypeFunctions.scala:40) [collections-0.13.11.jar:0.13.11]
+	at sbt.std.Transform$$anon$4.work(System.scala:63) [task-system-0.13.11.jar:0.13.11]
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228) [tasks-0.13.11.jar:0.13.11]
+	at sbt.Execute$$anonfun$submit$1$$anonfun$apply$1.apply(Execute.scala:228) [tasks-0.13.11.jar:0.13.11]
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:17) [control-0.13.11.jar:0.13.11]
+	at sbt.Execute.work(Execute.scala:237) [tasks-0.13.11.jar:0.13.11]
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228) [tasks-0.13.11.jar:0.13.11]
+	at sbt.Execute$$anonfun$submit$1.apply(Execute.scala:228) [tasks-0.13.11.jar:0.13.11]
+	at sbt.ConcurrentRestrictions$$anon$4$$anonfun$1.apply(ConcurrentRestrictions.scala:159) [tasks-0.13.11.jar:0.13.11]
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:28) [tasks-0.13.11.jar:0.13.11]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_121]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471) [na:1.7.0_121]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_121]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_121]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_121]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_121]
 

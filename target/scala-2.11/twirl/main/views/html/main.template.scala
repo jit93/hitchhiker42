@@ -60,8 +60,8 @@ Seq[Any](format.raw/*1.48*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Sun Nov 06 16:47:07 EST 2016
-                  SOURCE: /home/catriona316/hitch/app/views/main.scala.html
+                  DATE: Sat Nov 19 15:57:21 EST 2016
+                  SOURCE: /opt/dbcourse/hitchhiker42/app/views/main.scala.html
                   HASH: 252f6aee69a9b11dccff9d2d892ba099e857a9a5
                   MATRIX: 732->1|866->47|894->49|1393->521|1408->527|1464->562|1530->602|1557->608|1587->611|1650->647|1665->653|1715->682|1818->758|1846->765|1902->794|1930->801
                   LINES: 26->1|29->1|31->3|40->12|40->12|40->12|41->13|41->13|42->14|44->16|44->16|44->16|46->18|46->18|47->19|47->19

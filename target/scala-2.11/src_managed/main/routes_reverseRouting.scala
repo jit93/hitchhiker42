@@ -1,6 +1,6 @@
-// @SOURCE:/home/catriona316/hitch/conf/routes
+// @SOURCE:/opt/dbcourse/hitchhiker42/conf/routes
 // @HASH:b2deec6d9df1c7345c170ef07e65b7a8ea4777eb
-// @DATE:Sun Nov 06 16:26:48 EST 2016
+// @DATE:Sat Nov 19 15:57:20 EST 2016
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
