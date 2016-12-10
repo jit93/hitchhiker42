@@ -1,0 +1,44 @@
+SELECT name FROM users;
+  name  
+--------
+ cattie
+ Bruce
+ Emily
+ Katso
+(4 rows)
+
+SELECT email FROM usersWithCar;
+          email           
+--------------------------
+ cool_cattie7@yahoo.com
+ spartanvader93@gmail.com
+(2 rows)
+
+SELECT * FROM trips;
+ trip_id | current_location  | destination | estimated_start_date_time 
+---------+-------------------+-------------+---------------------------
+       1 | 123 allavista way | 1975        | 10/17/2016:10:25
+       2 | hotel california  | Las Vegas   | 11/11/2017:18:30
+(2 rows)
+
+SELECT nickname FROM groups;
+  nickname  
+------------
+ dopesquad
+ testing
+ chillsquad
+(3 rows)
+
+INSERT INTO users VALUES ('csh34@duke.edu', 'coolcat', 54321);
+INSERT 0 1
+UPDATE users SET passwordHash = 'password' WHERE email  = 'katso@gmail.com';
+UPDATE 1
+DELETE FROM userswithcar WHERE email = 'cool_cattie@yahoo.com';
+DELETE 0
+INSERT INTO groups VALUES (5, 'the best');
+INSERT 0 1
+UPDATE trips SET destination = 'Las Vegas' WHERE destination  = 'hotel california';
+UPDATE 0
+DELETE FROM groups WHERE gid = '2';
+DELETE 0
+INSERT INTO isMemberOF VALUES(‘notexistent, should fail due to foreign key constraint’, 1);
