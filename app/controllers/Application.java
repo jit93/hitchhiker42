@@ -10,16 +10,16 @@ import play.data.*;
 
 import views.html.*;
 
-import models.BeerDB;
+import models.hitchhiker42;
 
 public class Application extends Controller {
 
     public static Result index() throws SQLException {
-        return ok(index.render(BeerDB.getAllDrinkerNames()));
+        return ok(index.render(hitchhiker42.getAllDrinkerNames()));
     }
 
     public static Result viewDrinker(String name) throws SQLException {
-        BeerDB.DrinkerInfo drinkerInfo = BeerDB.getDrinkerInfo(name);
+        hitchhiker42.DrinkerInfo drinkerInfo = hitchhiker42.getDrinkerInfo(name);
         if (drinkerInfo == null) {
             return ok(error.render("No drinker named \"" + name + "\""));
         } else{
@@ -28,13 +28,13 @@ public class Application extends Controller {
     }
 
     public static Result editDrinker(String name) throws SQLException {
-        BeerDB.DrinkerInfo drinkerInfo = BeerDB.getDrinkerInfo(name);
+        hitchhiker42.DrinkerInfo drinkerInfo = hitchhiker42.getDrinkerInfo(name);
         if (drinkerInfo == null) {
             return ok(error.render("No drinker named \"" + name + "\""));
         } else{
             return ok(edit.render(drinkerInfo,
-                                  BeerDB.getAllBeerNames(),
-                                  BeerDB.getAllBarNames()));
+                                  hitchhiker42.getAllBeerNames(),
+                                  hitchhiker42.getAllBarNames()));
         }
     }
 
@@ -45,7 +45,7 @@ public class Application extends Controller {
         if (name == null || address == null) {
             return ok(error.render("Bad request"));
         }
-        BeerDB.DrinkerInfo drinkerInfo = BeerDB.getDrinkerInfo(name);
+        hitchhiker42.DrinkerInfo drinkerInfo = hitchhiker42.getDrinkerInfo(name);
         if (drinkerInfo == null) {
             return ok(error.render("No drinker named \"" + name + "\""));
         }
@@ -65,8 +65,8 @@ public class Application extends Controller {
                 }
             }
         }
-        boolean success = BeerDB.updateDrinkerInfo
-            (new BeerDB.DrinkerInfo(name, address,
+        boolean success = hitchhiker42.updateDrinkerInfo
+            (new hitchhiker42.DrinkerInfo(name, address,
                                     beersLiked, barsFrequented, timesFrequented));
         if (success) {
             return redirect(controllers.routes.Application
