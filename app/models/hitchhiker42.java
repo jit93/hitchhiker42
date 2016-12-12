@@ -479,10 +479,10 @@ public class hitchhiker42 {
         public ArrayList<String> depart_times = null;
         public TripsInfo() {
         }
-        public TripsInfo(public ArrayList<Integer> trip_ids,
-        public ArrayList<String> depart_locs,
-        public ArrayList<String> arrive_locs,
-        public ArrayList<String> depart_times) {
+        public TripsInfo(ArrayList<Integer> trip_ids,
+        	ArrayList<String> depart_locs,
+        	ArrayList<String> arrive_locs,
+        	ArrayList<String> depart_times) {
             this.trip_ids = trip_ids;
             this.depart_locs = depart_locs;
             this.arrive_locs = arrive_locs;
