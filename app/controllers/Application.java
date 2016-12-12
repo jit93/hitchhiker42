@@ -3,7 +3,7 @@ package controllers;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.ArrayList;
-import java.libs.Json;
+
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -24,45 +24,186 @@ public class Application extends Controller {
     //     }
     // }
 //--------------------------------------------------------------------------------------------------------------------------------
-    public static Result signInEntry(String email, String password) throws SQLException {
-        boolean success = signIn(email, password);
-        HashMap<String, Object> returnMap = new HashMap<String, Object>();
-        if (success) {
-            returnMap.put("email", email);
-            returnMap.put("status", "Welcome!");
-        } else{
-            returnMap.put("status", "Either incorrect email or password");
-        }
-    }
+//     public static Result updateTripInfo(Integer tripId, String currentLocation, String destination, String startTime, boolean delete) throws SQLException {
+//         boolean success = hitchhiker42.updateTripInfo((new hitchhiker42.TripInfo(tripId, currentLocation, destination, startTime)), delete);
+//         if (success){
+//             return ok(edit.render("Success"));
+//         } else {
+//             return ok(error.render("Error"));
+//         }
+//     }
 
-    public static Result getTripsList(int tripId, String depart, String arriv, String st1, String st2) throws SQLException {
-        hitchhiker42.TripsInfo trips = hitchhiker42.getTrips(tridId, depart, arriv, st1, st2);
-        HashMap<String, Object> returnMap = new HashMap<String, Object>();
-        if (trips == null) {
-            returnMap.put("status", "No trips match search criteria");
-        } 
-        else{
-            ArrayList<Object> returnList = new ArrayList<Object>();
-            for(int i = 0; i<trips.trip_ids.size(); i++){
-                HashMap<String, String> innerMap = new HashMap<String, String>();
-                innerMap.put("depart", trips.depart_locs.get(i));
-                innerMap.put("arriv", trips.arrive_locs.get(i));
-                innerMap.put("st", trips.depart_times.get(i));
-                HashMap<String, Object> outerMap = new HashMap<String, Object>();
-                outerMap.put(Integer.toString(tripId), innerMap);
-                returnList.add(outerMap);
-            }
-            returnMap.put("trips", returnList);
-            returnMap.put("status", "we got trips, bro");
-        }
-        return Json.toJson(returnMap);
-    }
+
+
+
+
+
+//     public static Result insertIntoUserInfo(String email, String name, String password) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.insertUserInfo(email, name, password);
+//         if (success) {
+//             return ok(edit.render("success, logging in..."));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result updateUserInfo(String email, String name, String password, boolean delete) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.updateUserInfo(email, name, password, delete);
+//         if (success) {
+//             return ok(edit.render("success, user info updated"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result insertIntoPassengers(int trip_id, String email) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.insertIntoPassengers(trip_id, email);
+//         if (success) {
+//             return ok(edit.render("trip added successfull"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+//     //FIGURE OUT WHAT IS WRONG WITH THIS, SAYS EXPECTS A .CLASS
+//     public static Result updatePassengers(int trip_id, String email, boolean delete) throws SQLException {
+//         //check to sanitize inputs
+
+//         boolean success = hitchhiker42.updatePassengers(trip_id, email, delete);
+//         if (success) {
+//             return ok(edit.render("success, trip updated"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result insertUsersWithCar(String email, int numSeats) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.insertUsersWithCar(email, numSeats);
+//         if (success) {
+//             return ok(edit.render("success, user with car added"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.updateUsersWithCar(email, numSeats, delete);
+//         if (success) {
+//             return ok(edit.render("success, logging in..."));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result insertIntoIsDrivenBy(int trip_id, String email) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.insertIntoIsDrivenBy(trip_id, email);
+//         if (success) {
+//             return ok(edit.render("success, driver for trip added"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result updateIsDrivenBy(int trip_id, String email, boolean delete) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         boolean success = hitchhiker42.updateIsDrivenBy(trip_id, email, delete);
+//         if (success) {
+//             return ok(edit.render("success, driver for trip info updated"));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result getDriver(int trip_id) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         String driverEmail = hitchhiker42.getDriver(trip_id);
+//         if (driveremail != null) {
+//             return ok(edit.render(driverEmail));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result getPassengers(int trip_id) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         ArrayList<String> passengerEmails = hitchhiker42.getPassengers(trip_id);
+//         if (passengerEmails != null) {
+//             return ok(edit.render(passengerEmails));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+
+
+//     public static Result getUserInfoo(String email) throws SQLException {
+//         //check to sanitize inputs
+
+
+//         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
+//         if (userInfo != null) {
+//             return ok(edit.render(userInfo));
+//         } else{
+//             return ok(error.render("error try again"));
+//         }
+//     }
+// //--------------------------------------------------------------------------------------------------------------------------------
+//     public static Result signInEntry(String email, String password) throws SQLException {
+//         boolean success = signIn(email, password);
+//         if (success) {
+//             return ok(main.render(email));
+//         } else{
+//             return ok(error.render("Either incorrect email or password"));
+//         }
+//     }
+
+
+// //--------------------------------------------------------------------------------------------------------------------------------
+//     public static Result getTripsList(int tripId, String depart, String arriv, String st) throws SQLException {
+//         hitchhiker42.Trips trips = hitchhiker42.getTrips(tridId, depart, arriv, st);
+//         if (trips == null) {
+//             return ok(error.render("No trips match search criteria"));
+//         } else{
+//             return ok(Trips.render(trips));
+//         }
+//     }
 
 
 
 
     public static Result index() throws SQLException {
-        return ok(index.render(hitchhiker42.getAllDrinkerNames()));
+        return ok(main.render(""));
     }
 
     public static Result viewDrinker(String name) throws SQLException {

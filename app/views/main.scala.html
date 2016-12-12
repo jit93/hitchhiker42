@@ -1,22 +1,44 @@
-@(heading: String)(script: Html)(content: Html)
+@(heading: String)
 
 <!DOCTYPE html>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <title>Play/Java DB-Beers Example</title>
-    <meta name="description" content="A sample Play/Java website for db-beers"/>
-    <meta name="keywords" content="play, java, db-beers"/>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen"/>
-    @script
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Hitchhiker</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("plugins/bower_components/ngQuickDate/dist/ng-quick-date.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("plugins/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css")">
+    <!-- Necessary JS Scripts -->
+    <!-- These should be at the bottom, but lol -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="@routes.Assets.at("plugins/bower_components/ngQuickDate/dist/ng-quick-date.min.js")"></script>
+    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
+    <script src="@routes.Assets.at("javascripts/mapController.js")"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiEx0NWUufVn-Oe6YmLhUNZxG-TVb98VM&libraries=places"></script>
   </head>
-  <body>
-    <h1><img src="@routes.Assets.at("images/beer.jpg")" style="float:right"/>Hitchhikers App</h1>
-    <hr/>
-    <h2 id="heading">@heading</h2>
-    <div id="content">@content</div>
-    <hr/>
+  <body ng-app="myApp">
+    <div class="wrapper-site" ng-controller="Controller">
+      <div class="left-content">
+        <div class="header left-header">
+          <p class="sign-in"><a href="sign-in.html">Sign-in</a> or <a href="sign-up.html">Sign-up</a></p>
+        </div>
+        <div class="nav-boxes">
+          <quick-datepicker ng-model='date1'></quick-datepicker>
+          <quick-datepicker ng-model='date2'></quick-datepicker>
+          <button ng-click="searchTrips()">Search for trips</button>
+        </div>
+      </div>
+      <div class="main-content">     
+        <div class="header main-header">
+          <p class="hitchhiker-text">Hitchhiker</p>
+        </div>
+        <div class="map-div">
+            <input id="pac-input" class="controls" type="text" placeholder="Type in a destination here">
+            <div id="map" ng-init="initMap()"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
