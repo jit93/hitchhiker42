@@ -1,17 +1,51 @@
-CREATE TABLE Bar(name VARCHAR(20) NOT NULL PRIMARY KEY,
-                 address VARCHAR(20));
-CREATE TABLE Beer(name VARCHAR(20) NOT NULL PRIMARY KEY,
-                  brewer VARCHAR(20));
-CREATE TABLE Drinker(name VARCHAR(20) NOT NULL PRIMARY KEY,
-                     address VARCHAR(20));
-CREATE TABLE Frequents(drinker VARCHAR(20) NOT NULL REFERENCES Drinker(name),
-                       bar VARCHAR(20) NOT NULL REFERENCES Bar(name),
-                       times_a_week SMALLINT CHECK(times_a_week > 0),
-                       PRIMARY KEY(drinker, bar));
-CREATE TABLE Serves(bar VARCHAR(20) NOT NULL REFERENCES Bar(name),
-                    beer VARCHAR(20) NOT NULL REFERENCES Beer(name),
-                    price DECIMAL(5,2) CHECK(price > 0),
-                    PRIMARY KEY(bar, beer));
-CREATE TABLE Likes(drinker VARCHAR(20) NOT NULL REFERENCES Drinker(name),
-                   beer VARCHAR(20) NOT NULL REFERENCES Beer(name),
-                   PRIMARY KEY(drinker, beer));
+CREATE TABLE users (
+    email    TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    passwordHash    TEXT NOT NULL,
+    PRIMARY KEY(email)
+);
+
+
+
+CREATE TABLE usersWithCar (
+    email TEXT NOT NULL UNIQUE,
+    numSeats INTEGER NOT NULL,
+    PRIMARY KEY(email),
+    FOREIGN KEY(email) REFERENCES users ( email )
+);
+
+CREATE TABLE trips (
+    trip_id    INTEGER NOT NULL UNIQUE,
+    current_location    TEXT,
+    destination    TEXT,
+    estimated_start_date_time    TEXT,
+    PRIMARY KEY(trip_id)
+);
+
+CREATE TABLE passengers (
+    trip_id    INTEGER NOT NULL,
+    email    TEXT NOT NULL,
+    PRIMARY KEY(trip_id,email),
+    FOREIGN KEY(email) REFERENCES users ( email )
+);
+
+CREATE TABLE groups (
+    gid    INTEGER NOT NULL,
+    nickname    TEXT NOT NULL,
+    PRIMARY KEY(gid)
+);
+
+CREATE TABLE isMemberOf (
+    email    TEXT NOT NULL,
+    gid    INTEGER NOT NULL,
+    PRIMARY KEY(email,gid),
+    FOREIGN KEY(email) REFERENCES users(email),
+    FOREIGN KEY(gid) REFERENCES groups(gid)
+);
+
+CREATE TABLE isDrivenBy (
+    trip_id    INTEGER NOT NULL UNIQUE,
+    email    TEXT,
+    PRIMARY KEY(trip_id),
+    FOREIGN KEY(email) REFERENCES users ( email )
+);

@@ -1,6 +1,8 @@
-\COPY Bar(name, address) FROM 'data/Bar.dat' WITH DELIMITER ',' NULL '' CSV
-\COPY Beer(name, brewer) FROM 'data/Beer.dat' WITH DELIMITER ',' NULL '' CSV
-\COPY Drinker(name, address) FROM 'data/Drinker.dat' WITH DELIMITER ',' NULL '' CSV
-\COPY Frequents(drinker, bar, times_a_week) FROM 'data/Frequents.dat' WITH DELIMITER ',' NULL '' CSV
-\COPY Serves(bar, beer, price) FROM 'data/Serves.dat' WITH DELIMITER ',' NULL '' CSV
-\COPY Likes(drinker, beer) FROM 'data/Likes.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY groups(gid, nickname) FROM 'data/groups.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY users(email, name, passwordhash) FROM 'data/users.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY isdrivenby(trip_id, email) FROM 'data/isDrivenBy.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY ismemberof(email, gid) FROM 'data/isMemberOf.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY passengers(trip_id, email) FROM 'data/passengers.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY trips(trip_id, current_location, destination, estimated_start_date_time) FROM 'data/trips.dat' WITH DELIMITER ',' NULL '' CSV
+\COPY userswithcar(email, numseats) FROM 'data/usersWithCar.dat' WITH DELIMITER ',' NULL '' CSV
+
