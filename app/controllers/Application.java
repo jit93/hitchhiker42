@@ -14,6 +14,7 @@ import models.hitchhiker42;
 
 public class Application extends Controller {
 
+    //COMMENTED OUT BECAUSE OF COMMENTED OUT COMMENT IN HITCHHIKER42.JAVA
     // public static Result insertIntoTrips(Integer tripId, String currentLocation, String destination, String startTime) throws SQLException {
     //     boolean success = hitchhiker42.insertIntoTrips(new hitchhiker42.TripInfo(tripId, currentLocation, destination, startTime));
     //     if (success){
@@ -76,16 +77,16 @@ public class Application extends Controller {
     }
 
     //FIGURE OUT WHAT IS WRONG WITH THIS, SAYS EXPECTS A .CLASS
-    // public static Result updatePassengers(int trip_id, String email, boolean delete) throws SQLException {
-    //     //check to sanitize inputs
+    public static Result updatePassengers(int trip_id, String email, boolean delete) throws SQLException {
+        //check to sanitize inputs
 
-    //     boolean success = hitchhiker42.updatePassengers(int trip_id, String email, boolean delete);
-    //     if (success) {
-    //         return ok(edit.render("success, trip updated"));
-    //     } else{
-    //         return ok(error.render("error try again"));
-    //     }
-    // }
+        boolean success = hitchhiker42.updatePassengers(trip_id, email, delete);
+        if (success) {
+            return ok(edit.render("success, trip updated"));
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result insertUsersWithCar(String email, int numSeats) throws SQLException {
