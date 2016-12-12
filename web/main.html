@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Hitchhiker</title>
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="plugins/bower_components/ngQuickDate/dist/ng-quick-date.css">
+    <link rel="stylesheet" href="plugins/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css">
+    <!-- Necessary JS Scripts -->
+    <!-- These should be at the bottom, but lol -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="plugins/bower_components/ngQuickDate/dist/ng-quick-date.min.js"></script>
+    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
     <script src="controllers/mapController.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiEx0NWUufVn-Oe6YmLhUNZxG-TVb98VM&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiEx0NWUufVn-Oe6YmLhUNZxG-TVb98VM&libraries=places"></script>
   </head>
   <body ng-app="myApp">
     <div class="left-content">
@@ -14,7 +22,7 @@
         <p class="sign-in"><a href="sign-in.html">Sign-in</a> or <a href="sign-up.html">Sign-up</a></p>
       </div>
       <div class="nav-boxes">
-        
+        <quick-datepicker ng-model='date1'></quick-datepicker>
       </div>
     </div>
     <div class="main-content">     
@@ -22,6 +30,7 @@
         <p class="hitchhiker-text">Hitchhiker</p>
       </div>
       <div ng-controller="MapController" class="map-div">
+          <input id="pac-input" class="controls" type="text" placeholder="Type in a destination here">
           <div id="map" ng-init="initMap()"></div>
       </div>
     </div>
