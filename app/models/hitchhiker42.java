@@ -471,6 +471,25 @@ public class hitchhiker42 {
         return userInfo;
     }
 
+     public static class TripsInfo {
+
+        public ArrayList<Integer> trip_ids = null;
+        public ArrayList<String> depart_locs = null;
+        public ArrayList<String> arrive_locs = null;
+        public ArrayList<String> depart_times = null;
+        public TripsInfo() {
+        }
+        public TripsInfo(public ArrayList<Integer> trip_ids,
+        public ArrayList<String> depart_locs,
+        public ArrayList<String> arrive_locs,
+        public ArrayList<String> depart_times) {
+            this.trip_ids = trip_ids;
+            this.depart_locs = depart_locs;
+            this.arrive_locs = arrive_locs;
+            this.depart_times = depart_times;
+        }
+    }
+    
     public static class DrinkerInfo {
         public String name = null;
         public String address = null;
