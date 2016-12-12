@@ -3,7 +3,7 @@
 mypath=`realpath $0`
 mybase=`dirname $mypath`
 
-dbname=carpool
+dbname=hitchhiker42
 
 if [[ -n `psql -lqt | cut -d \| -f 1 | grep -w "$dbname"` ]]; then
     dropdb $dbname
