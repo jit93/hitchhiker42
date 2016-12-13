@@ -221,6 +221,17 @@ public class Application extends Controller {
             return ok(error.render("error try again"));
         }
     }
+
+    public static Result getUserWithCar(String email) throws SQLException {
+        //check to sanitize inputs
+        ArrayList<String> userInfo = hitchhiker42.getUsersWithCar(email);
+        if (userInfo != null) {
+            return ok(userInfo.get(0)); //returns first user found;
+        } else{
+            System.out.println("in the error section of getuserinfo?");
+            return ok(error.render("error try again"));
+        }
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
     public static Result signInEntry(String email, String password) throws SQLException {
         boolean success = hitchhiker42.signIn(email, password);
