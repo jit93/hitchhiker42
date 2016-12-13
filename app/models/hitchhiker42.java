@@ -168,6 +168,36 @@ public class hitchhiker42 {
         }
         return true;
     }
+
+    public static ArrayList<String> getUserWithCar(String email) throws SQLException{
+        Connection connection = null;
+        ArrayList<String> users = new ArrayList<String>();
+        try {
+            connection = DB.getConnection();
+            
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT * FROM usersWithCar WHERE email = ?");
+                statement.setString(1, email);
+                ResultSet rs = statement.executeQuery();
+                 while (rs.next()){
+                    String user = rs.getString(1) + ", " + rs.getString(2);
+                    users.add(user);
+                 }
+                 rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        if(users.size() == 0){
+            users.add("., .");
+        }
+        return users;
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
     public static boolean updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException{
         Connection connection = null;

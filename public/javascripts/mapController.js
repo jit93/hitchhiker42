@@ -97,6 +97,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     }
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
+      $scope.signup_password="";
       $http({
         method: 'POST', 
         url : "/insertUser?email="+email+"&name="+username+"&password="+password
@@ -128,13 +129,20 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var email     = $scope.signin_email;
     var password  = $scope.signin_password;
     if (email !== undefined && password !== undefined) {
+      $scope.signin_password="";
       $http({
         method: 'GET', 
         url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
-        alert("sign in successful");
-        userEmail = email;
-        $scope.isSignedIn = true;
+        if(response['data'] == "null"){
+          alert("incorrect username or password");
+        }
+        else{
+          alert("sign in successful");
+          userEmail = email;
+          $scope.isSignedIn = true;
+        }
+        
       }, function myError(response) {
         alert("sign in failed from the server");
       });
@@ -182,12 +190,11 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.addToTrip = function() {
-    console.log(currentTrip);
     var trip    = currentTrip;
     if (trip !== undefined) {
       $http({
         method: 'POST', 
-        url : "/insert-Passenger?trip_id="+trip+"&email="+email
+        url : "/insert-Passenger?trip_id="+trip+"&email="+userEmail
       }).then(function mySuccess(response) {
         alert("edit successful");
       }, function myError(response) {
@@ -202,12 +209,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var start       = currentLocation;
     var destination = destinationLocation;
     var startTime   = $scope.newTripDate1;
-    var endTime     = $scope.newTripDate2;
-    if (start !== undefined && destination !== undefined && startTime !== undefined &&
-      endTime !== undefined && startTime < endTime) {
+    if (start !== undefined && destination !== undefined && startTime !== undefined) {
       $http({
         method: 'POST', 
-        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
+        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startTime
       }).then(function mySuccess(response) {
         alert("edit successful");
         $http({
@@ -255,6 +260,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       	var tripIDS = tripID.toString();
         $http({
             method: 'GET', 
+
             url : "/trip-search-id?tripId="+tripIDS
           }).then(function mySuccess(response) {
             alert("success");
@@ -275,7 +281,25 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
+            $scope.userInfo = "e-mail: " + response['data'].split(",")[0] + ", username: " + response['data'].split(",")[1];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
+      $http({
+            method: 'GET', 
+            url : "/get-Drivers?email=" + $scope.signin_email
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            if(response['data'].split(",")[0] == "."){
+              $scope.useInfo += " number of seats in car: N/A";
+            }
+            else{
+              $scope.userInfo += " number of seats in car: " + response['data'].split(",")[1];
+            }
+            
           }, function myError(response) {
             console.log("failure");
             console.log(response);

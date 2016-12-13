@@ -23,6 +23,7 @@ POST	/insertDriven			controllers.Application.insertIntoIsDrivenBy(trip_id:String
 PUT		/updateDriven			controllers.Application.updateIsDrivenBy(trip_id:String, email:String, delete:String)
 GET		/getUsers				controllers.Application.getUserInfo(email:String)
 POST     /test                       controllers.Application.test2(stringified:String)
+GET 	/get-Drivers			controllers.Application.getUserWithCar(email:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
