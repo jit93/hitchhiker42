@@ -13,8 +13,6 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var userEmail;
   var currentLocation;
   var destinationLocation;
-  // var trip_id_counter_temp = parseInt(Date.now()).toString();
-  // var trip_id_counter     = trip_id_counter_temp.substring(trip_id_counter_temp.length - 5, trip_id_counter_temp.length-1);
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -59,7 +57,6 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 
     // Add the autocomplete button
     initAutocomplete();
-    //addMarker();
   };
 
   function getTrips() {
@@ -302,15 +299,6 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             var pos = {lat: my_lat, lng: my_long};
             map.setCenter(pos);
             addMarker(pos, tripID);
-            // var mapOptions = {
-            //   center: pos, 
-            //     zoom: 10
-            // }
-
-            //Creating the map
-            //map = new google.maps.Map(mapCanvasGlobal, mapOptions);
-            //document.getElementById('pac-input')
-            //now simulate click or enter press
           }, function myError(response) {
             alert("failure");
             //so either way input in "pac-input" and then simulate a click on it
@@ -324,7 +312,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 
 
   $scope.getUserInfo = function() {
-    console.log("getting user info");
+    //console.log("getting user info");
     var url1 = "/getUsers?email=" + $scope.signin_email;
     //var url1 = "/getUsers?email=user13@gmail.com";
     if($scope.signin_email != null){
@@ -333,11 +321,11 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             url : url1
           }).then(function mySuccess(response) {
             console.log("success");
-            console.log(response);
+            //console.log(response);
             $scope.userInfo = "e-mail: " + response['data'].split(",")[0] + ", username: " + response['data'].split(",")[1];
           }, function myError(response) {
             console.log("failure");
-            console.log(response);
+            //console.log(response);
             $scope.userInfo = response["data"];
           });
       $http({
@@ -345,7 +333,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             url : "/get-Drivers?email=" + $scope.signin_email
           }).then(function mySuccess(response) {
             console.log("success");
-            console.log(response);
+            //console.log(response);
             if(response['data'].split(",")[0] == "."){
               $scope.useInfo += " number of seats in car: N/A";
             }
@@ -355,7 +343,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             
           }, function myError(response) {
             console.log("failure");
-            console.log(response);
+            //console.log(response);
             $scope.userInfo = response["data"];
           });
     }
