@@ -12,6 +12,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var userEmail;
   var currentLocation;
   var destinationLocation;
+  var trip_id_counter = 1;
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -170,8 +171,9 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (start !== undefined && destination !== undefined) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insert?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
       }).then(function mySuccess(response) {
+      	trip_id_counter++;
         console.log("edit successful");
       }, function myError(response) {
         console.log("edit failed");
@@ -181,7 +183,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     }
   }
 
-  $scope.searchTrips = function() {
+$scope.searchTrips = function() {
     console.log("should be searching trips");
     var firstDay  = $scope.date1;
     var secondDay = $scope.date2;
@@ -194,12 +196,13 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         var parameter = JSON.stringify(json);
         $http({
             method: 'GET', 
-            url : "/trip-search"
+            url : "/trip-search?tridId=*&depart=*&arriv=*&st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
             console.log("success");
           }, function myError(response) {
             console.log("failure");
           });
+  
       // $http.get(base+url).success(function(data, status, headers, config) {
       //   // this callback will be called asynchronously
       //   // when the response is available
