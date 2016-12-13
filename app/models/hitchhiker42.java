@@ -468,33 +468,32 @@ public class hitchhiker42 {
 
 
 
-//     public static ArrayList<String> getUserInfo(String email) throws SQLException{
-//         Connection connection = null;
-//         ArrayList<String> userInfo = new ArrayList<String>();
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
+    public static ArrayList<String> getUserInfo(String email) throws SQLException{
+        Connection connection = null;
+        ArrayList<String> userInfo = new ArrayList<String>();
+        try {
+            connection = DB.getConnection();
             
-//             PreparedStatement statement = connection
-//                 .prepareStatement("SELECT * FROM users WHERE email = ?");
-//             statement.setString(1, email);
-//             ResultSet rs = statement.executeQuery();
-//             while (rs.next()) {
-//                 String information = rs.getString(1);
-//                 userInfo.add(information);
-//             }
-//             rs.close();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return userInfo;
-//     }
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT * FROM users WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String information = rs.getString(1);
+                userInfo.add(information);
+            }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return userInfo;
+    }
 
 //      public static class TripsInfo {
 

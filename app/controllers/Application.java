@@ -179,17 +179,15 @@ public class Application extends Controller {
     }
 
 
-//     public static Result getUserInfoo(String email) throws SQLException {
-//         //check to sanitize inputs
-
-
-//         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
-//         if (userInfo != null) {
-//             return ok(edit.render(userInfo));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+    public static Result getUserInfo(String email) throws SQLException {
+        //check to sanitize inputs
+        ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
+        if (userInfo != null) {
+            return ok(userInfo);
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
 //     public static Result signInEntry(String email, String password) throws SQLException {
 //         boolean success = signIn(email, password);
