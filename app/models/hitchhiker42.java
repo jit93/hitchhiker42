@@ -216,16 +216,16 @@ public class hitchhiker42 {
         Connection connection = null;
         try {
             connection = DB.getConnection();
-            Statement statement = connection.createStatement();
+            
             if(!delete){
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("UPDATE passengers VALUES(?, ?)");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
             }
             else{
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("DELETE FROM passengers WHERE trip_id = ? AND email = ?");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
@@ -246,9 +246,8 @@ public class hitchhiker42 {
     public static boolean insertIntoIsDrivenBy(int trip_id, String email) throws SQLException{
         Connection connection = null;
         try {
-            connection = DB.getConnection();
-            Statement statement = connection.createStatement();
-            statement = connection
+            connection = DB.getConnection();            
+            PreparedStatement statement = connection
                 .prepareStatement("INSERT INTO isdrivenBy VALUES(?, ?)");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
@@ -268,17 +267,16 @@ public class hitchhiker42 {
     public static boolean updateIsDrivenBy(int trip_id, String email, boolean delete) throws SQLException{
         Connection connection = null;
         try {
-            connection = DB.getConnection();
-            Statement statement = connection.createStatement();
+            connection = DB.getConnection();            
             if(!delete){
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("UPDATE isDrivenBy VALUES(?, ?)");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
             }
             else{
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("DELETE FROM isDrivenBy WHERE trip_id = ?");
                 statement.setInt(1, trip_id);
                 statement.executeUpdate();
