@@ -195,22 +195,19 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       }).then(function mySuccess(response) {
         console.log("edit successful");
         $http({
-        method: 'POST', 
-        url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
-      }).then(function mySuccess(response) {
-        console.log("edit successful");
+          method: 'POST', 
+          url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
+        }).then(function mySuccess(response) {
+          console.log("edit successful");
+          trip_id_counter++;
+        }, function myError(response) {
+          console.log("edit failed");
+        });
       }, function myError(response) {
         console.log("edit failed");
-        trip_id_counter++;
       });
     } else {
       console.log("you shouldn't be able to make a new trip");
-      }, function myError(response) {
-        console.log("edit failed");
-      });
-    } else {
-      console.log("you shouldn't be able to make a new trip");
-
     }
   }
 
