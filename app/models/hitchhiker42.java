@@ -17,7 +17,7 @@ public class hitchhiker42 {
 	ResultSet rs;
 	PreparedStatement statement;
 
-	if(startd1 !="*"){
+	if(!startd1.equals("*")){
              statement = connection
                  .prepareStatement("SELECT * FROM trips WHERE estimated_start_date_time >= ? AND estimated_start_date_time <= ?");
              statement.setString(1, startd1);
@@ -30,16 +30,14 @@ public class hitchhiker42 {
                  .prepareStatement("SELECT * FROM trips WHERE trip_id = ?");
              statement.setInt(1, t_id_int);
              rs = statement.executeQuery();	
-					}
+		}
 
-             if (! rs.next()) {
-                 return null;
-             }
              ArrayList<Integer> trip_ids = new ArrayList<Integer>();
              ArrayList<String> curs = new ArrayList<String>();
              ArrayList<String> dests = new ArrayList<String>();            
              ArrayList<String> s_ds = new ArrayList<String>();
              while (rs.next()){
+                  System.out.println("******************************** in result.rs");
                  Integer trip_id = rs.getInt(1);
                  trip_ids.add(trip_id);
                  String cur = rs.getString(2);
@@ -350,7 +348,6 @@ public class hitchhiker42 {
             statement.setString(4, tripInfo.depart_times.get(0));
             statement.executeUpdate();
             statement.close();
-            connection.commit();
         } finally {
             if (connection != null){
                 try {
@@ -374,7 +371,6 @@ public class hitchhiker42 {
                 statement.setInt(1, tripInfo.trip_ids.get(0));
                 statement.executeUpdate();
                 statement.close();
-                connection.commit();
             }
             else{
             PreparedStatement statement = connection.prepareStatement("UPDATE trips SET destination = ?, current_location = ?, estimated_start_date_time = ? WHERE trip_id = ?");
@@ -385,10 +381,8 @@ public class hitchhiker42 {
             success = (statement.executeUpdate() == 1);
             statement.close();
             if (! success){
-                connection.rollback();
                 return false;
-            }
-            connection.commit();    
+            }    
             }
         } finally {
             if (connection!=null){
@@ -658,68 +652,68 @@ public class hitchhiker42 {
         return drinkerInfo;
     }
 
-    public static boolean updateDrinkerInfo(DrinkerInfo drinkerInfo)
-        throws SQLException {
-        Connection connection = null;
-        boolean oldAutoCommitState = true;
-        boolean success = false;
-        try {
-            connection = DB.getConnection();
-            oldAutoCommitState = connection.getAutoCommit();
-            connection.setAutoCommit(false);
-            // update basic info:
-            PreparedStatement statement = connection
-                .prepareStatement("UPDATE drinker SET address = ? WHERE name = ?");
-            statement.setString(1, drinkerInfo.address);
-            statement.setString(2, drinkerInfo.name);
-            success = (statement.executeUpdate() == 1);
-            statement.close();
-            if (! success) {
-                connection.rollback();
-                return false;
-            }
-            // delete old beers liked:
-            statement = connection
-                .prepareStatement("DELETE FROM Likes WHERE drinker = ?");
-            statement.setString(1, drinkerInfo.name);
-            statement.executeUpdate();
-            statement.close();
-            // add new beers liked:
-            statement = connection
-                .prepareStatement("INSERT INTO Likes VALUES(?, ?)");
-            for (String beer: drinkerInfo.beersLiked) {
-                statement.setString(1, drinkerInfo.name);
-                statement.setString(2, beer);
-                statement.executeUpdate();
-            }
-            statement.close();
-            // delete old bars frequented:
-            statement = connection
-                .prepareStatement("DELETE FROM Frequents WHERE drinker = ?");
-            statement.setString(1, drinkerInfo.name);
-            statement.executeUpdate();
-            statement.close();
-            // add new bars frequented:
-            statement = connection
-                .prepareStatement("INSERT INTO Frequents VALUES(?, ?, ?)");
-            for (int i=0; i<drinkerInfo.barsFrequented.size(); i++) {
-                statement.setString(1, drinkerInfo.name);
-                statement.setString(2, drinkerInfo.barsFrequented.get(i));
-                statement.setInt(3, drinkerInfo.timesFrequented.get(i));
-                statement.executeUpdate();
-            }
-            statement.close();
-            connection.commit();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.setAutoCommit(oldAutoCommitState);
-                    connection.close();
-                } catch (Exception e) {
-                }
-            }
-        }
-        return success;
-    }
+    // public static boolean updateDrinkerInfo(DrinkerInfo drinkerInfo)
+    //     throws SQLException {
+    //     Connection connection = null;
+    //     boolean oldAutoCommitState = true;
+    //     boolean success = false;
+    //     try {
+    //         connection = DB.getConnection();
+    //         oldAutoCommitState = connection.getAutoCommit();
+    //         connection.setAutoCommit(false);
+    //         // update basic info:
+    //         PreparedStatement statement = connection
+    //             .prepareStatement("UPDATE drinker SET address = ? WHERE name = ?");
+    //         statement.setString(1, drinkerInfo.address);
+    //         statement.setString(2, drinkerInfo.name);
+    //         success = (statement.executeUpdate() == 1);
+    //         statement.close();
+    //         if (! success) {
+    //             connection.rollback();
+    //             return false;
+    //         }
+    //         // delete old beers liked:
+    //         statement = connection
+    //             .prepareStatement("DELETE FROM Likes WHERE drinker = ?");
+    //         statement.setString(1, drinkerInfo.name);
+    //         statement.executeUpdate();
+    //         statement.close();
+    //         // add new beers liked:
+    //         statement = connection
+    //             .prepareStatement("INSERT INTO Likes VALUES(?, ?)");
+    //         for (String beer: drinkerInfo.beersLiked) {
+    //             statement.setString(1, drinkerInfo.name);
+    //             statement.setString(2, beer);
+    //             statement.executeUpdate();
+    //         }
+    //         statement.close();
+    //         // delete old bars frequented:
+    //         statement = connection
+    //             .prepareStatement("DELETE FROM Frequents WHERE drinker = ?");
+    //         statement.setString(1, drinkerInfo.name);
+    //         statement.executeUpdate();
+    //         statement.close();
+    //         // add new bars frequented:
+    //         statement = connection
+    //             .prepareStatement("INSERT INTO Frequents VALUES(?, ?, ?)");
+    //         for (int i=0; i<drinkerInfo.barsFrequented.size(); i++) {
+    //             statement.setString(1, drinkerInfo.name);
+    //             statement.setString(2, drinkerInfo.barsFrequented.get(i));
+    //             statement.setInt(3, drinkerInfo.timesFrequented.get(i));
+    //             statement.executeUpdate();
+    //         }
+    //         statement.close();
+    //         connection.commit();
+    //     } finally {
+    //         if (connection != null) {
+    //             try {
+    //                 connection.setAutoCommit(oldAutoCommitState);
+    //                 connection.close();
+    //             } catch (Exception e) {
+    //             }
+    //         }
+    //     }
+    //     return success;
+    // }
 
 }
