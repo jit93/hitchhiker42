@@ -11,6 +11,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var currentTrip = $scope.currentTrip;
   var userEmail;
   var currentLocation;
+  var destinationLocation;
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -38,6 +39,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
+        currentLocation = pos;
         currentLocKnown = true;
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -146,7 +148,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.addToTrip = function() {
-    var trip    = $scope.currentTrip;
+    console.log(currentTrip);
+    var trip    = currentTrip;
     if (trip !== undefined) {
       $http({
         method: 'POST', 
@@ -163,7 +166,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 
   $scope.makeTrip = function() {
     var start       = currentLocation;
-    var destination = $scope.destination;
+    var destination = destinationLocation;
     if (start !== undefined && destination !== undefined) {
       $http({
         method: 'POST', 
@@ -277,7 +280,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25)
         };
-        $scope.destination = places.formatted_address;
+        $scope.destination = place.formatted_address;
+        destinationLocation = place.geometry.location;
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
