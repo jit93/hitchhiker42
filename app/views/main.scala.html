@@ -40,26 +40,28 @@
               <div><button ng-click="makeTrip()">Make Trip</button></div>
             </div>
           </div>
-          <div class="sign-in">
-            <p class="nav-text">Signing-in</p>
-            <input type="text" ng-model="signin_email" placeholder="Enter email to sign in">
-            <input type="text" ng-model="signin_password" placeholder="Enter password to sign in">
-          <div><button ng-click="signin()">Sign in</button></div>
-          </div>
-          <div class="sign-up">
-            <p class="nav-text">Signing-up</p>
-            <input type="text" ng-model="signup_email" placeholder="Enter email to sign up">
-            <input type="text" ng-model="signup_password" placeholder="Enter password to sign up">
-            <input type="text" ng-model="signup_number_of_seats" placeholder="Enter number of seats">
-            <input type="text" ng-model="signup_username" placeholder="Enter username">
-            <p>Do you have a car? <input type="checkbox" ng-model="signup_has_car"></p>
-          <div><button ng-click="signup()">Sign up</button></div>
+          <div ng-hide="isSignedIn">
+            <div class="sign-in">
+              <p class="nav-text">Sign-in</p>
+              <input type="text" ng-model="signin_email" placeholder="Enter email to sign in">
+              <input type="password" ng-model="signin_password" placeholder="Enter password to sign in">
+            <div><button ng-click="signin()">Sign in</button></div>
+            </div>
+            <div class="sign-up">
+              <p class="nav-text">Sign-up</p>
+              <input type="text" ng-model="signup_email" placeholder="Enter email to sign up">
+              <input type="password" ng-model="signup_password" placeholder="Enter password to sign up">
+              <input type="text" ng-model="signup_number_of_seats" placeholder="Enter number of seats">
+              <input type="text" ng-model="signup_username" placeholder="Enter username">
+              <p>Do you have a car? <input type="checkbox" ng-model="signup_has_car"></p>
+            <div><button ng-click="signup()">Sign up</button></div>
+            </div>
           </div>
           <div ng-show="isSignedIn">
             <div class="edit">
               <p class="nav-text">Editing</p>
               <input type="text" ng-model="edit_email" placeholder="Enter email to edit">
-              <input type="text" ng-model="edit_password" placeholder="Enter password to edit">
+              <input type="password" ng-model="edit_password" placeholder="Enter password to edit">
               <input type="text" ng-model="edit_number_of_seats" placeholder="Enter number of seats">
               <input type="text" ng-model="edit_username" placeholder="Enter username">
               <p>Do you have a car? <input type="checkbox" ng-model="edit_has_car"></p>

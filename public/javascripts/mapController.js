@@ -97,6 +97,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     }
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
+      $scope.signup_password="";
       $http({
         method: 'POST', 
         url : "/insertUser?email="+email+"&name="+username+"&password="+password
@@ -128,6 +129,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var email     = $scope.signin_email;
     var password  = $scope.signin_password;
     if (email !== undefined && password !== undefined) {
+      $scope.signin_password="";
       $http({
         method: 'GET', 
         url : "/signIn?email="+email+"&password="+password
