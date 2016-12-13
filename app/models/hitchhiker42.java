@@ -160,35 +160,35 @@ public class hitchhiker42 {
 //         return true;
 //     }
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException{
-//         Connection connection = null;
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-//             if(!delete){
-//                 statement = connection
-//                 .prepareStatement("UPDATE usersWithCar VALUES(?, ?)");
-//                 statement.setString(1, email);
-//                 statement.setString(2, numseats);
-//                 statement.executeUpdate();
-//             }
-//             else{
-//                 statement = connection
-//                 .prepareStatement("DELETE FROM usersWithCar WHERE email = ?");
-//                 statement.setString(1, email);
-//                 statement.executeUpdate();
-//             }
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return true;
-//     }
+    public static boolean updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException{
+        Connection connection = null;
+        try {
+            connection = DB.getConnection();
+            Statement statement = connection.createStatement();
+            if(!delete){
+                statement = connection
+                .prepareStatement("UPDATE usersWithCar VALUES(?, ?)");
+                statement.setString(1, email);
+                statement.setInt(2, numseats);
+                statement.executeUpdate();
+            }
+            else{
+                statement = connection
+                .prepareStatement("DELETE FROM usersWithCar WHERE email = ?");
+                statement.setString(1, email);
+                statement.executeUpdate();
+            }
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return true;
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
     public static boolean insertIntoPassengers(int trip_id, String email) throws SQLException{
         Connection connection = null;

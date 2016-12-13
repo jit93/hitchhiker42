@@ -107,17 +107,21 @@ public class Application extends Controller {
 //     }
 
 
-//     public static Result updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException {
-//         //check to sanitize inputs
+    public static Result updateUsersWithCar(String email, String numSeats, String delete) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.updateUsersWithCar(email, numSeats, delete);
-//         if (success) {
-//             return ok(edit.render("success, logging in..."));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        int numSeats_int = Integer.parseInt(numSeats);
+        boolean delete_bool = true;
+        if(delete.equalsIgnoreCase("false")){
+            delete_bool = false;
+        }
+        boolean success = hitchhiker42.updateUsersWithCar(email, numSeats_int, delete_bool);
+        if (success) {
+            return ok("success, logging in...");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result insertIntoIsDrivenBy(String trip_id, String email) throws SQLException {
