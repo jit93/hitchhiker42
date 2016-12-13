@@ -94,17 +94,17 @@ public class Application extends Controller {
     }
 
 
-//     public static Result insertUsersWithCar(String email, int numSeats) throws SQLException {
-//         //check to sanitize inputs
+    public static Result insertUsersWithCar(String email, String numSeats) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.insertUsersWithCar(email, numSeats);
-//         if (success) {
-//             return ok(edit.render("success, user with car added"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        int numSeats_int = Integer.parseInt(numSeats);
+        boolean success = hitchhiker42.insertUsersWithCar(email, numSeats_int);
+        if (success) {
+            return ok("success, user with car added");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result updateUsersWithCar(String email, String numSeats, String delete) throws SQLException {
@@ -187,7 +187,7 @@ public class Application extends Controller {
         //check to sanitize inputs
         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
         if (userInfo != null) {
-            return ok(userInfo.toString());
+            return ok(userInfo);
         } else{
             return ok(error.render("error try again"));
         }

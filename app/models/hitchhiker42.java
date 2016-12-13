@@ -139,27 +139,27 @@ public class hitchhiker42 {
          return true;
      }
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean insertUsersWithCar(String email, int numseats) throws SQLException{
-//         Connection connection = null;
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-//             statement = connection
-//                 .prepareStatement("INSERT INTO usersWtihCar VALUES(?, ?)");
-//                 statement.setString(1, email);
-//                 statement.setString(2, numseats);
-//                 statement.executeUpdate();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return true;
-//     }
+    public static boolean insertUsersWithCar(String email, int numseats) throws SQLException{
+        Connection connection = null;
+        try {
+            connection = DB.getConnection();
+            Statement statement = connection.createStatement();
+            statement = connection
+                .prepareStatement("INSERT INTO usersWtihCar VALUES(?, ?)");
+                statement.setString(1, email);
+                statement.setInt(2, numseats);
+                statement.executeUpdate();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return true;
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
     public static boolean updateUsersWithCar(String email, int numSeats, boolean delete) throws SQLException{
         Connection connection = null;
