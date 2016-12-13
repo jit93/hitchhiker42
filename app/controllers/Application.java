@@ -85,10 +85,15 @@ public class Application extends Controller {
     }
 
 //     //FIGURE OUT WHAT IS WRONG WITH THIS, SAYS EXPECTS A .CLASS
-    public static Result updatePassengers(String trip_id, String email, boolean delete) throws SQLException {
+    public static Result updatePassengers(String trip_id, String email, String delete) throws SQLException {
         //check to sanitize inputs
+        boolean delete_bool = true;
+        if(delete.equalsIgnoreCase("false")){
+            delete_bool = false;
+        }
+
         int trip_id_int = Integer.parseInt(trip_id);
-        boolean success = hitchhiker42.updatePassengers(trip_id_int, email, delete);
+        boolean success = hitchhiker42.updatePassengers(trip_id_int, email, delete_bool);
         if (success) {
             return ok("success, trip updated");
         } else{
@@ -140,11 +145,16 @@ public class Application extends Controller {
     }
 
 
-    public static Result updateIsDrivenBy(String trip_id, String email, boolean delete) throws SQLException {
+    public static Result updateIsDrivenBy(String trip_id, String email, String delete) throws SQLException {
         //check to sanitize inputs
 
+        boolean delete_bool = true;
+        if(delete.equalsIgnoreCase("false")){
+            delete_bool = false;
+        }
+
         int trip_id_int = Integer.parseInt(trip_id);
-        boolean success = hitchhiker42.updateIsDrivenBy(trip_id_int, email, delete);
+        boolean success = hitchhiker42.updateIsDrivenBy(trip_id_int, email, delete_bool);
         if (success) {
             return ok("success, driver for trip info updated");
         } else{
@@ -164,14 +174,14 @@ public class Application extends Controller {
             return ok(error.render("error try again"));
         }
     }
-     public static Result signInEntry(String email, String password) throws SQLException {
-         boolean success = hitchhiker42.signIn(email, password);
-         if (success) {
-             return ok(email);
-         } else{
-             return ok(password);//error.render("Either incorrect email or password"));
-         }
-     }
+    // public static Result signInEntry(String email, String password) throws SQLException {
+    //      boolean success = hitchhiker42.signIn(email, password);
+    //      if (success) {
+    //          return ok(email);
+    //      } else{
+    //          return ok(password);//error.render("Either incorrect email or password"));
+    //      }
+    //  }
 
     public static Result getPassengers(String trip_id) throws SQLException {
         //check to sanitize inputs
@@ -196,14 +206,14 @@ public class Application extends Controller {
         }
     }
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static Result signInEntry(String email, String password) throws SQLException {
-//         boolean success = signIn(email, password);
-//         if (success) {
-//             return ok(main.render(email));
-//         } else{
-//             return ok(error.render("Either incorrect email or password"));
-//         }
-//     }
+    public static Result signInEntry(String email, String password) throws SQLException {
+        boolean success = signIn(email, password);
+        if (success) {
+            return ok(main.render(email));
+        } else{
+            return ok(error.render("Either incorrect email or password"));
+        }
+    }
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
