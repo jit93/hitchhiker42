@@ -14,15 +14,24 @@ public class hitchhiker42 {
          try {
              connection = DB.getConnection();
              // retrieve basic info:
+	ResultSet rs;
+	PreparedStatement statement;
+
+	if(startd1 !="*"){
+             statement = connection
+                 .prepareStatement("SELECT * FROM trips WHERE estimated_start_date_time >= ? AND estimated_start_date_time <= ?");
+             statement.setString(1, startd1);
+             statement.setString(2, startd2);
+             rs = statement.executeQuery();	
+	}
+	else{
              int t_id_int = Integer.parseInt(t_id);
-             PreparedStatement statement = connection
-                 .prepareStatement("SELECT * FROM trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND estimated_start_date_time >= ? AND estimated_start_date_time <= ?");
+	     statement = connection
+                 .prepareStatement("SELECT * FROM trips WHERE trip_id = ?");
              statement.setInt(1, t_id_int);
-             statement.setString(2, dep);
-             statement.setString(3, arr);
-             statement.setString(4, startd1);
-             statement.setString(5, startd2);
-             ResultSet rs = statement.executeQuery();
+             rs = statement.executeQuery();	
+					}
+
              if (! rs.next()) {
                  return null;
              }

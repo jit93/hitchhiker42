@@ -238,7 +238,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         var parameter = JSON.stringify(json);
         $http({
             method: 'GET', 
-            url : "/trip-search?tridId=*&depart=*&arriv=*&st1="+firstDay+"&st2="+secondDay
+            url : "/trip-search-time?st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
             alert("success");
           }, function myError(response) {
@@ -252,9 +252,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       if (tripID == undefined) {
         alert("Please fill all required fields");
       } else {
+      	var tripIDS = tripID.toString();
         $http({
             method: 'GET', 
-            url : "/trip-search?tridId="+tripID+"&depart=*&arriv=*&st1=*&st2=*"
+            url : "/trip-search-id?tripId="+tripIDS
           }).then(function mySuccess(response) {
             alert("success");
           }, function myError(response) {

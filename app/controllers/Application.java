@@ -233,8 +233,8 @@ public class Application extends Controller {
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
-public static Result getTripsList(String tripId, String depart, String arriv, String st1, String st2) throws SQLException {
-         hitchhiker42.TripInfo trips = hitchhiker42.getTrips(tripId, depart, arriv, st1, st2);
+public static Result getTripsListId(String tripId) throws SQLException {
+         hitchhiker42.TripInfo trips = hitchhiker42.getTrips(tripId, "*", "*", "*", "*");
          if (trips == null) {
              return ok(error.render("No trips match search criteria"));
          } else{
@@ -242,7 +242,15 @@ public static Result getTripsList(String tripId, String depart, String arriv, St
              return ok(hi);
          }
      }
-
+public static Result getTripsListTime(String st1, String st2) throws SQLException {
+         hitchhiker42.TripInfo trips = hitchhiker42.getTrips("*","*","*", st1, st2);
+         if (trips == null) {
+             return ok(error.render("No trips match search criteria"));
+         } else{
+             String hi = "" + trips.trip_ids.toString() + "|" + trips.depart_locs.toString() + "|" + trips.arrive_locs.toString() + "|" + trips.depart_times.toString() + "";
+             return ok(hi);
+         }
+     }
     public static Result test2(String stringDict) throws SQLException {
         //System.out.println("hello world");
         //JsonNode result = Json.newObject();
