@@ -187,7 +187,7 @@ public class Application extends Controller {
         //check to sanitize inputs
         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
         if (userInfo != null) {
-            return ok(userInfo);
+            return ok(userInfo.toString());
         } else{
             return ok(error.render("error try again"));
         }
