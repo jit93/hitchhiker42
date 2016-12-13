@@ -411,7 +411,32 @@ public class hitchhiker42 {
     }
 
 
+     public static boolean signIn(String em, String pass) throws SQLException {
+         Connection connection = null;
+         try {
+             connection = DB.getConnection();
+             PreparedStatement statement = connection
+                 .prepareStatement("SELECT email, passwordHash FROM users WHERE email = ? AND passwordHash = ?");
+             statement.setString(1, em);
+             statement.setString(2, pass);
+             ResultSet rs = statement.executeQuery();
+             if (! rs.next()) {
+                 return false;
+             }
 
+
+             rs.close();
+             statement.close();
+         } finally {
+             if (connection != null) {
+                 try {
+                     connection.close();
+                 } catch (Exception e) {
+                 }
+             }
+         }
+         return true;
+     }
 
     public static ArrayList<String> getPassengers(String trip_id) throws SQLException{
         Connection connection = null;
