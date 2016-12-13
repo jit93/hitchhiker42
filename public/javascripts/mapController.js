@@ -182,12 +182,11 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.addToTrip = function() {
-    console.log(currentTrip);
     var trip    = currentTrip;
     if (trip !== undefined) {
       $http({
         method: 'POST', 
-        url : "/insert-Passenger?trip_id="+trip+"&email="+email
+        url : "/insert-Passenger?trip_id="+trip+"&email="+userEmail
       }).then(function mySuccess(response) {
         alert("edit successful");
       }, function myError(response) {
@@ -202,12 +201,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var start       = currentLocation;
     var destination = destinationLocation;
     var startTime   = $scope.newTripDate1;
-    var endTime     = $scope.newTripDate2;
-    if (start !== undefined && destination !== undefined && startTime !== undefined &&
-      endTime !== undefined && startTime < endTime) {
+    if (start !== undefined && destination !== undefined && startTime !== undefined) {
       $http({
         method: 'POST', 
-        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
+        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startTime
       }).then(function mySuccess(response) {
         alert("edit successful");
         $http({
