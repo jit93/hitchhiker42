@@ -3,6 +3,7 @@ var myApp = angular.module('myApp', ["ngQuickDate"]);
 myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   	 //Setting the default map position
  	var pos = {lat: 36.0014258, lng: -78.9382286};
+  var mapCanvasGlobal;
   var zoom = 12;
  	var map;
   $scope.isSignedIn = false;
@@ -12,12 +13,14 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var userEmail;
   var currentLocation;
   var destinationLocation;
-  var trip_id_counter = 1;
+  var trip_id_counter_temp = parseInt(Date.now()).toString();
+  var trip_id_counter     = trip_id_counter_temp.substring(trip_id_counter_temp.length - 5, trip_id_counter_temp.length-1);
 
  	$scope.initMap = function() {
  		console.log("map should load");
  		//Grabbing the DOM point to add the map
     var mapCanvas = document.getElementById("map");
+    mapCanvasGlobal = mapCanvas;
     //Default map options
     var mapOptions = {
     	center: pos, 
@@ -40,7 +43,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
-        currentLocation = pos;
+        currentLocation = "("+position.coords.latitude+","+position.coords.longitude+")";
         currentLocKnown = true;
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -56,7 +59,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 
     // Add the autocomplete button
     initAutocomplete();
-    addMarker();
+    //addMarker();
   };
 
   function getTrips() {
@@ -70,12 +73,12 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
                             'Error: Your browser doesn\'t support geolocation.');
   }
 
-  function addMarker() {
-  	console.log("should add a marker")
-  	var marker = new google.maps.Marker({
-      position: pos,
+  function addMarker(center, titleText) {
+    console.log("should add a marker")
+    var marker = new google.maps.Marker({
+      position: center,
       map: map,
-      title: 'Test'
+      title: titleText
     });
     listOfMarkers.push(marker);
     marker.addListener('click', function(){
@@ -85,6 +88,22 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       $scope.$apply();
     });
   };
+
+  // function addMarker() {
+  // 	console.log("should add a marker")
+  // 	var marker = new google.maps.Marker({
+  //     position: pos,
+  //     map: map,
+  //     title: 'Test'
+  //   });
+  //   listOfMarkers.push(marker);
+  //   marker.addListener('click', function(){
+  //     currentTrip=marker.title;
+  //     console.log(currentTrip);
+  //     $scope.currentTrip = currentTrip;
+  //     $scope.$apply();
+  //   });
+  // };
 
   $scope.signup = function() {
     var email     = $scope.signup_email;
@@ -264,11 +283,38 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             url : "/trip-search-id?tripId="+tripIDS
           }).then(function mySuccess(response) {
             alert("success");
+            //so either way input in "pac-input" and then simulate a click on it
+            alert(response);
+
+            document.getElementById('pac-input').value = response['data'].split("|")[2];
+            var pos_temp = response['data'].split("|")[2];
+            //pos_temp = pos_temp.substring(1, pos_temp.length-2);
+            var lat_long = pos_temp.split(',');
+            var my_lat = parseInt(lat_long[0]);
+            var my_long = parseInt(lat_long[1]);
+            var pos = {lat: my_lat, lng: my_long};
+            map.setCenter(pos);
+            addMarker(pos, tripID);
+            // var mapOptions = {
+            //   center: pos, 
+            //     zoom: 10
+            // }
+
+            //Creating the map
+            //map = new google.maps.Map(mapCanvasGlobal, mapOptions);
+            //document.getElementById('pac-input')
+            //now simulate click or enter press
           }, function myError(response) {
             alert("failure");
+            //so either way input in "pac-input" and then simulate a click on it
+            alert(response);
+            document.getElementById('pac-input').value = response['data'].split("|")[2];
+            //now simulate click or enter press
+            console.log(response['data'][2]);
           });
       }
   }
+
 
   $scope.getUserInfo = function() {
     console.log("getting user info");

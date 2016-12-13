@@ -251,7 +251,8 @@ public static Result getTripsListId(String tripId) throws SQLException {
          if (trips == null) {
              return ok(error.render("No trips match search criteria"));
          } else{
-             String hi = "" + trips.trip_ids.toString() + "|" + trips.depart_locs.toString() + "|" + trips.arrive_locs.toString() + "|" + trips.depart_times.toString() + "";
+             // String hi = "" + trips.trip_ids.toString() + "|" + trips.depart_locs.toString() + "|" + trips.arrive_locs.toString() + "|" + trips.depart_times.toString() + "";
+            String hi = "" + trips.trip_ids.get(0) + "|" + trips.depart_locs.get(0) + "|" + trips.arrive_locs.get(0).substring(1, trips.arrive_locs.get(0).length() - 2) + "|" + trips.depart_times.get(0) + "";
              return ok(hi);
          }
      }
@@ -261,6 +262,14 @@ public static Result getTripsListTime(String st1, String st2) throws SQLExceptio
              return ok(error.render("No trips match search criteria"));
          } else{
              String hi = "" + trips.trip_ids.toString() + "|" + trips.depart_locs.toString() + "|" + trips.arrive_locs.toString() + "|" + trips.depart_times.toString() + "";
+             
+             // String hi = ""
+             // for (int i = 0; i < trips.length(); i++){
+             //    for (int j; j < trips.trip_ids.length(); j++){
+             //        hi += trips
+             //    }
+             // }
+
              return ok(hi);
          }
      }
@@ -304,42 +313,42 @@ public static Result getTripsListTime(String st1, String st2) throws SQLExceptio
         }
     }
 
-    public static Result updateDrinker() throws SQLException {
-        Map<String, String> data = Form.form().bindFromRequest().data();
-        String name = data.get("name");
-        String address = data.get("address");
-        if (name == null || address == null) {
-            return ok(error.render("Bad request"));
-        }
-        hitchhiker42.DrinkerInfo drinkerInfo = hitchhiker42.getDrinkerInfo(name);
-        if (drinkerInfo == null) {
-            return ok(error.render("No drinker named \"" + name + "\""));
-        }
-        ArrayList<String> beersLiked = new ArrayList<String>();
-        ArrayList<String> barsFrequented = new ArrayList<String>();
-        ArrayList<Integer> timesFrequented = new ArrayList<Integer>();
-        for (Map.Entry<String, String> entry: data.entrySet()) {
-            if (entry.getKey().startsWith("BeersLiked/")) {
-                beersLiked.add(entry.getKey()
-                               .substring("BeersLiked/".length()));
-            } else if (entry.getKey().startsWith("BarsFrequented/")) {
-                int times = Integer.parseInt(entry.getValue());
-                if (times > 0) {
-                    barsFrequented.add(entry.getKey()
-                                       .substring("BarsFrequented/".length()));
-                    timesFrequented.add(Integer.parseInt(entry.getValue()));
-                }
-            }
-        }
-        boolean success = hitchhiker42.updateDrinkerInfo
-            (new hitchhiker42.DrinkerInfo(name, address,
-                                    beersLiked, barsFrequented, timesFrequented));
-        if (success) {
-            return redirect(controllers.routes.Application
-                            .viewDrinker(drinkerInfo.name));
-        } else {
-            return ok(error.render("No drinker named \"" + name + "\""));
-        }
-    }
+    // public static Result updateDrinker() throws SQLException {
+    //     Map<String, String> data = Form.form().bindFromRequest().data();
+    //     String name = data.get("name");
+    //     String address = data.get("address");
+    //     if (name == null || address == null) {
+    //         return ok(error.render("Bad request"));
+    //     }
+    //     hitchhiker42.DrinkerInfo drinkerInfo = hitchhiker42.getDrinkerInfo(name);
+    //     if (drinkerInfo == null) {
+    //         return ok(error.render("No drinker named \"" + name + "\""));
+    //     }
+    //     ArrayList<String> beersLiked = new ArrayList<String>();
+    //     ArrayList<String> barsFrequented = new ArrayList<String>();
+    //     ArrayList<Integer> timesFrequented = new ArrayList<Integer>();
+    //     for (Map.Entry<String, String> entry: data.entrySet()) {
+    //         if (entry.getKey().startsWith("BeersLiked/")) {
+    //             beersLiked.add(entry.getKey()
+    //                            .substring("BeersLiked/".length()));
+    //         } else if (entry.getKey().startsWith("BarsFrequented/")) {
+    //             int times = Integer.parseInt(entry.getValue());
+    //             if (times > 0) {
+    //                 barsFrequented.add(entry.getKey()
+    //                                    .substring("BarsFrequented/".length()));
+    //                 timesFrequented.add(Integer.parseInt(entry.getValue()));
+    //             }
+    //         }
+    //     }
+    //     boolean success = hitchhiker42.updateDrinkerInfo
+    //         (new hitchhiker42.DrinkerInfo(name, address,
+    //                                 beersLiked, barsFrequented, timesFrequented));
+    //     if (success) {
+    //         return redirect(controllers.routes.Application
+    //                         .viewDrinker(drinkerInfo.name));
+    //     } else {
+    //         return ok(error.render("No drinker named \"" + name + "\""));
+    //     }
+    // }
 
 }
