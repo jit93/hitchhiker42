@@ -132,9 +132,15 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'GET', 
         url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
-        alert("sign in successful");
-        userEmail = email;
-        $scope.isSignedIn = true;
+        if(response['data'] == "null"){
+          alert("incorrect username or password");
+        }
+        else{
+          alert("sign in successful");
+          userEmail = email;
+          $scope.isSignedIn = true;
+        }
+        
       }, function myError(response) {
         alert("sign in failed from the server");
       });
