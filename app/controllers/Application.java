@@ -82,16 +82,16 @@ public class Application extends Controller {
     }
 
 //     //FIGURE OUT WHAT IS WRONG WITH THIS, SAYS EXPECTS A .CLASS
-//     public static Result updatePassengers(int trip_id, String email, boolean delete) throws SQLException {
-//         //check to sanitize inputs
-
-//         boolean success = hitchhiker42.updatePassengers(trip_id, email, delete);
-//         if (success) {
-//             return ok(edit.render("success, trip updated"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+    public static Result updatePassengers(String trip_id, String email, boolean delete) throws SQLException {
+        //check to sanitize inputs
+        int trip_id_int = Integer.parseInt(trip_id);
+        boolean success = hitchhiker42.updatePassengers(trip_id_int, email, delete);
+        if (success) {
+            return ok("success, trip updated");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
 //     public static Result insertUsersWithCar(String email, int numSeats) throws SQLException {
