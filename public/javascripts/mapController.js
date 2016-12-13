@@ -129,7 +129,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var password  = $scope.signin_password;
     if (email !== undefined && password !== undefined) {
       $http({
-        method: 'POST', 
+        method: 'GET', 
         url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
         console.log("sign in successful");
