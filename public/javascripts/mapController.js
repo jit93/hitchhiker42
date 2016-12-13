@@ -130,17 +130,35 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (hasCar == undefined) {
       hasCar = false;
     }
+	console.log(hasCar);
+	console.log(email);
+	console.log(password);
+	console.log(numSeats);
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
+	 if(hasCar) { //PUT request to UsersWithCar
+	 	var seats = numSeats.toString();
+		console.log(seats);
+	 	$http({
+			method: 'PUT',
+			url: "/updateCarUsers?email="+email+"&numSeats="+seats+"&delete=false"
+		}).then(function mySuccess(response) {
+		console.log("edit with car successful");
+		}, function myError(response) {
+			console.log("edit with car failed");
+		});
+	 }
+	 else { //PUT request to Users
       $http({
-        method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        method: 'PUT', 
+        url : "/updateUser?email="+email+"&name="+username+"&password="+password+"&delete=false"
       }).then(function mySuccess(response) {
-        console.log("edit successful");
+        console.log("edit user successful");
       }, function myError(response) {
-        console.log("edit failed");
+        console.log("edit user failed");
       });
-    } else {
+   }
+   } else {
       console.log("you shouldn't be able to edit");
     }
   }

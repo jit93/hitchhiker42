@@ -143,7 +143,7 @@ public class hitchhiker42 {
         try {
             connection = DB.getConnection();
             PreparedStatement statement = connection
-                .prepareStatement("INSERT INTO usersWtihCar VALUES(?, ?)");
+                .prepareStatement("INSERT INTO usersWithCar VALUES(?, ?)");
                 statement.setString(1, email);
                 statement.setInt(2, numseats);
                 statement.executeUpdate();
@@ -166,9 +166,9 @@ public class hitchhiker42 {
 
             if(!delete){
                 PreparedStatement statement = connection
-                .prepareStatement("UPDATE usersWithCar VALUES(?, ?)");
-                statement.setString(1, email);
-                statement.setInt(2, numSeats);
+                .prepareStatement("UPDATE usersWithCar SET numSeats = ? WHERE email = ?");
+                statement.setInt(1, numSeats);
+                statement.setString(2, email);
                 statement.executeUpdate();
                 statement.close();
             }
