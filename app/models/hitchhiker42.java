@@ -54,33 +54,32 @@ public class hitchhiker42 {
          return trips;
      }
 //--------------------------------------------------------------------------------------------------------------------------------
-    // public static boolean signIn(String em, String pass) throws SQLException {
-    //     Connection connection = null;
-    //     boolean valid = null;
-    //     try {
-    //         connection = DB.getConnection();
-    //         PreparedStatement statement = connection
-    //             .prepareStatement("SELECT email, passwordHash FROM Users WHERE email = ? AND passwordHash = ?");
-    //         statement.setString(1, em);
-    //         statement.setString(2, pass);
-    //         ResultSet rs = statement.executeQuery();
-    //         if (! rs.next()) {
-    //             return 0;
-    //         }
+    public static boolean signIn(String email, String password) throws SQLException {
+        Connection connection = null;
+        boolean valid = null;
+        try {
+            connection = DB.getConnection();
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT email, passwordHash FROM Users WHERE email = ? AND passwordHash = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            if (! rs.next()) {
+                return 0;
+            }
 
-
-    //         rs.close();
-    //         statement.close();
-    //     } finally {
-    //         if (connection != null) {
-    //             try {
-    //                 connection.close();
-    //             } catch (Exception e) {
-    //             }
-    //         }
-    //     }
-    //     return 1;
-    // }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return 1;
+    }
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------

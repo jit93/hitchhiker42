@@ -209,7 +209,7 @@ public class Application extends Controller {
     public static Result signInEntry(String email, String password) throws SQLException {
         boolean success = signIn(email, password);
         if (success) {
-            return ok(main.render(email));
+            return ok(email);
         } else{
             return ok(error.render("Either incorrect email or password"));
         }
