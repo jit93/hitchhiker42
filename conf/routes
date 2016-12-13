@@ -9,7 +9,7 @@ POST    /update-drinker             controllers.Application.updateDrinker()
 GET 	/trip-search 				controllers.Application.test()
 GET 	/get-Driver					controllers.Application.getDriver(tripId:String)
 GET 	/get-Passengers				controllers.Application.getPassengers(tripId:String)
-
+GET 	/signIn				controllers.Application.signInEntry(email:String, password:String)
 POST     /test                       controllers.Application.test2(stringified:String)
 
 # Map static resources from the /public folder to the /assets URL path
