@@ -413,33 +413,33 @@ public class hitchhiker42 {
 
 
 
-//     public static ArrayList<String> getPassengers(int trip_id) throws SQLException{
-//         Connection connection = null;
-//         ArrayList<String> passengerEmails = new ArrayList<String>();
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-            
-//             PreparedStatement statement = connection
-//                 .prepareStatement("SELECT email FROM passengers WHERE trip_id = ?");
-//             statement.setString(1, trip_id);
-//             ResultSet rs = statement.executeQuery();
-//             while (rs.next()) {
-//                 String passngerEmail = rs.getString(1);
-//                 passngerEmails.add(passengerEmail);
-//             }
-//             rs.close();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return passengerEmails;
-//     }
+    public static ArrayList<String> getPassengers(String trip_id) throws SQLException{
+        Connection connection = null;
+        ArrayList<String> passengerEmails = new ArrayList<String>();
+        try {
+            connection = DB.getConnection();
+            int trip_id_int = Integer.parseInt(trip_id);
+
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT email FROM passengers WHERE trip_id = ?");
+            statement.setInt(1, trip_id_int);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String passengerEmail = rs.getString(1);
+                passengerEmails.add(passengerEmail);
+            }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return passengerEmails;
+    }
 
 
 

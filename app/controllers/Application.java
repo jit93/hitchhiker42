@@ -159,17 +159,17 @@ public class Application extends Controller {
     }
 
 
-//     public static Result getPassengers(int trip_id) throws SQLException {
-//         //check to sanitize inputs
+    public static Result getPassengers(String trip_id) throws SQLException {
+        //check to sanitize inputs
 
 
-//         ArrayList<String> passengerEmails = hitchhiker42.getPassengers(trip_id);
-//         if (passengerEmails != null) {
-//             return ok(edit.render(passengerEmails));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        ArrayList<String> passengerEmails = hitchhiker42.getPassengers(trip_id);
+        if (passengerEmails != null) {
+            return ok(passengerEmails.toString());
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
 //     public static Result getUserInfoo(String email) throws SQLException {
