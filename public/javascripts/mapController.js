@@ -11,6 +11,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var currentTrip = $scope.currentTrip;
   var userEmail;
   var currentLocation;
+  var destinationLocation;
+  var trip_id_counter = 1;
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -38,6 +40,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         infoWindow.setPosition(pos);
         infoWindow.setContent('Location found.');
         map.setCenter(pos);
+        currentLocation = pos;
         currentLocKnown = true;
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -55,6 +58,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     initAutocomplete();
     addMarker();
   };
+
+  function getTrips() {
+
+  }
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
@@ -74,6 +81,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     marker.addListener('click', function(){
       currentTrip=marker.title;
       console.log(currentTrip);
+      $scope.currentTrip = currentTrip;
       $scope.$apply();
     });
   };
@@ -91,13 +99,25 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
      numSeats !== undefined && numSeats >= 0) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insertUser?email="+email+"&name="+username+"&password="+password
       }).then(function mySuccess(response) {
         console.log("sign up successful");
         userEmail = email;
+	      if(hasCar){
+		      $http({
+		        method: 'POST', 
+		        url : "/insertCarUsers?email="+email+"&numSeats="+numSeats
+		      }).then(function mySuccess(response) {
+		        console.log("sign up successful");
+		      }, function myError(response) {
+		        console.log("sign up failed");
+		      });
+
+	      }
       }, function myError(response) {
         console.log("sign up failed");
       });
+
     } else {
       console.log("you shouldn't be able to sign up");
     }
@@ -164,57 +184,73 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.addToTrip = function() {
-    var trip    = $scope.currentTrip;
+    console.log(currentTrip);
+    var trip    = currentTrip;
     if (trip !== undefined) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insert-Passenger?trip_id="+trip+"&email="+email
       }).then(function mySuccess(response) {
         console.log("edit successful");
       }, function myError(response) {
         console.log("edit failed");
       });
     } else {
-      console.log("you shouldn't be able to edit");
+      console.log("you shouldn't be add yourself to a trip");
     }
   }
 
   $scope.makeTrip = function() {
     var start       = currentLocation;
-    var destination = $scope.destination;
-    if (start !== undefined && destination !== undefined) {
+    var destination = destinationLocation;
+    var startTime   = $scope.newTripDate1;
+    var endTime     = $scope.newTripDate2;
+    if (start !== undefined && destination !== undefined && startTime !== undefined &&
+      endTime !== undefined && startTime < endTime) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+        $http({
+        method: 'POST', 
+        url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
       }).then(function mySuccess(response) {
         console.log("edit successful");
       }, function myError(response) {
         console.log("edit failed");
+        trip_id_counter++;
       });
     } else {
-      console.log("you shouldn't be able to edit");
+      console.log("you shouldn't be able to make a new trip");
+      }, function myError(response) {
+        console.log("edit failed");
+      });
+    } else {
+      console.log("you shouldn't be able to make a new trip");
+
     }
   }
 
   $scope.searchTrips = function() {
-    console.log("should be searching trips");
     var firstDay  = $scope.date1;
     var secondDay = $scope.date2;
     if (firstDay === null || secondDay === null || firstDay === undefined || secondDay === undefined ||
       (firstDay >= secondDay)) {
-        console.log("shouldn't search  trips, invalid ")
+        console.log("shouldn't search trips by dates");
     } else {
         console.log("should have rest post to server");
         var json      = {"first-time":firstDay, "second-time":secondDay};
         var parameter = JSON.stringify(json);
         $http({
             method: 'GET', 
-            url : "/trip-search"
+            url : "/trip-search?tridId=*&depart=*&arriv=*&st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
             console.log("success");
           }, function myError(response) {
             console.log("failure");
           });
+  
       // $http.get(base+url).success(function(data, status, headers, config) {
       //   // this callback will be called asynchronously
       //   // when the response is available
@@ -225,23 +261,61 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       //   // or server returns response with an error status.
       //   console.log("failure");
       // });
+
     }
   }
 
-
-  $scope.testfunction = function() {
-    console.log("testing function");
-    var testvariable = {};
-    testvariable["example"] = "123";
-    var parameter = JSON.stringify({"stringified": "testing123"});
-    var url = "/test?stringified=" + parameter;
-    
-    $http.post(url, parameter).success(function mySuccess(response) {
+  $scope.searchTripByID = function() {
+      var tripID = $scope.search_trip_by_id;
+      if (tripID == undefined) {
+        console.log("shouldn't search trip by id");
+      } else {
+        console.log("should search trip by id");
+        $http({
+            method: 'GET', 
+            url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
+          }).then(function mySuccess(response) {
             console.log("success");
-          }).error(function myError(response) {
+          }, function myError(response) {
             console.log("failure");
-          })
+          });
+      }
+  }
 
+  // $scope.numUsers = function() {
+  //   console.log("getting total number of users");
+  //   var url = "/getUsers?email=spartanvader93@gmail.com";
+
+  //    $http({
+  //           method: 'GET', 
+  //           url : "/getUsers?email=spartanvader93@gmail.com"
+  //         }).then(function mySuccess(response) {
+  //           console.log("success");
+  //           console.log(response);
+  //           $scope.totalNumUsers = response.length;
+  //         }, function myError(response) {
+  //           console.log("failure");
+  //           console.log(response);
+  //         });
+  // }
+
+  $scope.getUserInfo = function() {
+    console.log("getting user info");
+    var url1 = "/getUsers?email=" + $scope.signin_email;
+    //var url1 = "/getUsers?email=user13@gmail.com";
+
+    $http({
+            method: 'GET', 
+            url : url1
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            $scope.userInfo = response['data'];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
   }
 
   // This example adds a search box to a map, using the Google Place Autocomplete
@@ -295,7 +369,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25)
         };
-        $scope.destination = places.formatted_address;
+        $scope.destination = place.formatted_address;
+        destinationLocation = place.geometry.location;
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
@@ -312,6 +387,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         }
       });
       map.fitBounds(bounds);
+      $scope.$apply();
     });
   }
 }]);

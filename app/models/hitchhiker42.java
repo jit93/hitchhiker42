@@ -16,7 +16,7 @@ public class hitchhiker42 {
              // retrieve basic info:
              int t_id_int = Integer.parseInt(t_id);
              PreparedStatement statement = connection
-                 .prepareStatement("SELECT * FROM Trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND start_date_time >= ? AND start_date_time <= ?");
+                 .prepareStatement("SELECT * FROM trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND estimated_start_date_time >= ? AND estimated_start_date_time <= ?");
              statement.setInt(1, t_id_int);
              statement.setString(2, dep);
              statement.setString(3, arr);
@@ -60,7 +60,7 @@ public class hitchhiker42 {
         try {
             connection = DB.getConnection();
             PreparedStatement statement = connection
-                .prepareStatement("SELECT email, passwordHash FROM Users WHERE email = ? AND passwordHash = ?");
+                .prepareStatement("SELECT email, passwordHash FROM users WHERE email = ? AND passwordHash = ?");
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
@@ -113,9 +113,10 @@ public class hitchhiker42 {
              connection = DB.getConnection();
              if(!delete){
                  PreparedStatement statement = connection
-                 .prepareStatement("UPDATE users SET name = ?, passwordHash = ?");
+                 .prepareStatement("UPDATE users SET name = ?, passwordHash = ? WHERE email = ?");
              statement.setString(1, newName);
              statement.setString(2, newPasswordHash);
+             statement.setString(3, email);
              statement.executeUpdate();
              statement.close();
              }
@@ -218,7 +219,7 @@ public class hitchhiker42 {
             
             if(!delete){
                 PreparedStatement statement = connection
-                .prepareStatement("UPDATE passengers VALUES(?, ?)");
+                .prepareStatement("UPDATE passengers SET trip_id = ? WHERE email = ?");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
@@ -248,7 +249,7 @@ public class hitchhiker42 {
         try {
             connection = DB.getConnection();            
             PreparedStatement statement = connection
-                .prepareStatement("INSERT INTO isdrivenBy VALUES(?, ?)");
+                .prepareStatement("INSERT INTO isDrivenBy VALUES(?, ?)");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
@@ -270,9 +271,10 @@ public class hitchhiker42 {
             connection = DB.getConnection();            
             if(!delete){
                 PreparedStatement statement = connection
-                .prepareStatement("UPDATE isDrivenBy VALUES(?, ?)");
-                statement.setInt(1, trip_id);
-                statement.setString(2, email);
+                .prepareStatement("UPDATE isDrivenBy SET email = ? WHERE trip_id = ?");
+                statement.setString(1, email);
+                statement.setInt(2, trip_id);
+
                 statement.executeUpdate();
                 statement.close();
             }
@@ -302,7 +304,7 @@ public class hitchhiker42 {
         boolean success = false;
         try{
             connection = DB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO Trips VALUES(?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO trips VALUES(?,?,?,?)");
             statement.setInt(1, tripInfo.trip_ids.get(0));
             statement.setString(2, tripInfo.depart_locs.get(0));
             statement.setString(3, tripInfo.arrive_locs.get(0));
@@ -329,14 +331,14 @@ public class hitchhiker42 {
         try{
             connection = DB.getConnection();
             if (delete){
-                PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM trips WHERE trip_id = ?");
                 statement.setInt(1, tripInfo.trip_ids.get(0));
                 statement.executeUpdate();
                 statement.close();
                 connection.commit();
             }
             else{
-            PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE trips SET destination = ?, current_location = ?, estimated_start_date_time = ? WHERE trip_id = ?");
             statement.setString(1, tripInfo.arrive_locs.get(0));
             statement.setString(2, tripInfo.depart_locs.get(0));
             statement.setString(3, tripInfo.depart_times.get(0));
@@ -461,7 +463,10 @@ public class hitchhiker42 {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                String information = rs.getString(1);
+                //String information = rs.getString(1);
+                String information = rs.getString(1) +", ";
+                information += rs.getString(2) + ", ";
+                information += rs.getString(3);
                 userInfo.add(information);
             }
             rs.close();
