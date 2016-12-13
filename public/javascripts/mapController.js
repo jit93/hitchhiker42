@@ -300,8 +300,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     console.log("getting user info");
     var url1 = "/getUsers?email=" + $scope.signin_email;
     //var url1 = "/getUsers?email=user13@gmail.com";
-
-    $http({
+    if($scope.signin_email != null){
+      $http({
             method: 'GET', 
             url : url1
           }).then(function mySuccess(response) {
@@ -313,6 +313,11 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             console.log(response);
             $scope.userInfo = response["data"];
           });
+    }
+    else{
+      $scope.userInfo = "please sign in first";
+    }
+    
   }
 
   // This example adds a search box to a map, using the Google Place Autocomplete
