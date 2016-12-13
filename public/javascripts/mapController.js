@@ -260,7 +260,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         console.log("should search trip by id");
         $http({
             method: 'GET', 
-            url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
+            url : "/trip-search?tridId="+tripID+"&depart=*&arriv=*&st1=*&st2=*"
           }).then(function mySuccess(response) {
             console.log("success");
           }, function myError(response) {
