@@ -340,43 +340,43 @@ public class hitchhiker42 {
 //     }
 
 
-//     public static boolean updateTripInfo(TripInfo tripInfo, boolean delete)
-//         throws SQLException {
-//         Connection connection = null;
-//         boolean success = false;
-//         try{
-//             connection = DB.getConnection();
-//             if (delete){
-//                 PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
-//                 statement.setString(1, tripInfo.tripId);
-//                 statement.executeUpdate();
-//                 statement.close();
-//                 connection.commit();
-//             }
-//             else{
-//             PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
-//             statement.setString(1, tripInfo.destination);
-//             statement.setString(2, tripInfo.currentLocation);
-//             statement.setString(3, tripInfo.startTime);
-//             statement.setString(4, tripInfo.tripId);
-//             success = (statement.executeUpdate() == 1);
-//             statement.close();
-//             if (! success){
-//                 connection.rollback();
-//                 return false;
-//             }
-//             connection.commit();    
-//             }
-//         } finally {
-//             if (connection!=null){
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return success;
-//     }
+    public static boolean updateTripInfo(TripInfo tripInfo, boolean delete)
+        throws SQLException {
+        Connection connection = null;
+        boolean success = false;
+        try{
+            connection = DB.getConnection();
+            if (delete){
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
+                statement.setInt(1, tripInfo.tripId);
+                statement.executeUpdate();
+                statement.close();
+                connection.commit();
+            }
+            else{
+            PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
+            statement.setString(1, tripInfo.destination);
+            statement.setString(2, tripInfo.currentLocation);
+            statement.setString(3, tripInfo.startTime);
+            statement.setInt(4, tripInfo.tripId);
+            success = (statement.executeUpdate() == 1);
+            statement.close();
+            if (! success){
+                connection.rollback();
+                return false;
+            }
+            connection.commit();    
+            }
+        } finally {
+            if (connection!=null){
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return success;
+    }
 
 
 

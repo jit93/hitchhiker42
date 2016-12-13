@@ -29,14 +29,20 @@ public class Application extends Controller {
     //     }
     // }
 //--------------------------------------------------------------------------------------------------------------------------------
-//     public static Result updateTripInfo(Integer tripId, String currentLocation, String destination, String startTime, boolean delete) throws SQLException {
-//         boolean success = hitchhiker42.updateTripInfo((new hitchhiker42.TripInfo(tripId, currentLocation, destination, startTime)), delete);
-//         if (success){
-//             return ok(edit.render("Success"));
-//         } else {
-//             return ok(error.render("Error"));
-//         }
-//     }
+    public static Result updateTripInfo(String tripId, String currentLocation, String destination, String startTime, String delete) throws SQLException {
+        int tripId_int = Integer.parseInt(tripId);
+        boolean delete_bool = true;
+        if(delete.equalsIgnoreCase("false")){
+            delete_bool = false;
+        }
+
+        boolean success = hitchhiker42.updateTripInfo((new hitchhiker42.TripInfo(tripId_int, currentLocation, destination, startTime)), delete_bool);
+        if (success){
+            return ok("Success");
+        } else {
+            return ok(error.render("Error"));
+        }
+    }
 
 
 
@@ -174,14 +180,6 @@ public class Application extends Controller {
             return ok(error.render("error try again"));
         }
     }
-    // public static Result signInEntry(String email, String password) throws SQLException {
-    //      boolean success = hitchhiker42.signIn(email, password);
-    //      if (success) {
-    //          return ok(email);
-    //      } else{
-    //          return ok(password);//error.render("Either incorrect email or password"));
-    //      }
-    //  }
 
     public static Result getPassengers(String trip_id) throws SQLException {
         //check to sanitize inputs
