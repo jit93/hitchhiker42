@@ -129,7 +129,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var password  = $scope.signin_password;
     if (email !== undefined && password !== undefined) {
       $http({
-        method: 'POST', 
+        method: 'GET', 
         url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
         alert("sign in successful");
@@ -141,6 +141,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     } else {
       alert("Please fill all required fields");
     }
+    $scope.getUserInfo();
   }
 
   $scope.edit = function() {
@@ -273,7 +274,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'];
+            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
           }, function myError(response) {
             console.log("failure");
             console.log(response);
