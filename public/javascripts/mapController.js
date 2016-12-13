@@ -261,7 +261,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         console.log("should search trip by id");
         $http({
             method: 'GET', 
-            url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
+            url : "/trip-search?trip_id=" + tripID + "&depart=.&arrive=.&st1=.&st2=." 
           }).then(function mySuccess(response) {
             console.log("success");
           }, function myError(response) {
@@ -292,6 +292,18 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var url1 = "/getUsers?email=" + $scope.signin_email;
     //var url1 = "/getUsers?email=user13@gmail.com";
     if($scope.signin_email != null){
+      $http({
+            method: 'GET', 
+            url : url1
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
       $http({
             method: 'GET', 
             url : url1
