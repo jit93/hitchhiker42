@@ -13,8 +13,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var userEmail;
   var currentLocation;
   var destinationLocation;
-  var trip_id_counter_temp = parseInt(Date.now()).toString();
-  var trip_id_counter     = trip_id_counter_temp.substring(trip_id_counter_temp.length - 5, trip_id_counter_temp.length-1);
+  // var trip_id_counter_temp = parseInt(Date.now()).toString();
+  // var trip_id_counter     = trip_id_counter_temp.substring(trip_id_counter_temp.length - 5, trip_id_counter_temp.length-1);
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -225,6 +225,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.makeTrip = function() {
+    var trip_id_counter_temp = parseInt(Date.now()).toString();
+    var trip_id_counter     = trip_id_counter_temp.substring(trip_id_counter_temp.length - 5, trip_id_counter_temp.length-1);
     var start       = currentLocation;
     var destination = destinationLocation;
     var startTime   = JSON.stringify($scope.newTripDate1);
@@ -265,8 +267,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             url : "/trip-search-time?st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
             alert("success");
+            alert(response);
           }, function myError(response) {
             alert("failure");
+            alert(response);
           });
     }
   }
