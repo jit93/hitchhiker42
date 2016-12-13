@@ -133,17 +133,17 @@ public class Application extends Controller {
 //     }
 
 
-//     public static Result updateIsDrivenBy(int trip_id, String email, boolean delete) throws SQLException {
-//         //check to sanitize inputs
+    public static Result updateIsDrivenBy(String trip_id, String email, boolean delete) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.updateIsDrivenBy(trip_id, email, delete);
-//         if (success) {
-//             return ok(edit.render("success, driver for trip info updated"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        int trip_id_int = Integer.parseInt(trip_id);
+        boolean success = hitchhiker42.updateIsDrivenBy(trip_id_int, email, delete);
+        if (success) {
+            return ok("success, driver for trip info updated");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result getDriver(String trip_id) throws SQLException {
