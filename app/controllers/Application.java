@@ -207,7 +207,7 @@ public static Result getTripsList(String tripId, String depart, String arriv, St
          if (trips == null) {
              return ok(error.render("No trips match search criteria"));
          } else{
-             return ok(trips);
+             return ok("hiii");
          }
      }
 
