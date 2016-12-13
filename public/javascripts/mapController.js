@@ -99,13 +99,25 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
      numSeats !== undefined && numSeats >= 0) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insertUser?email="+email+"&name="+username+"&password="+password
       }).then(function mySuccess(response) {
         console.log("sign up successful");
         userEmail = email;
+	      if(hasCar){
+		      $http({
+		        method: 'POST', 
+		        url : "/insertCarUsers?email="+email+"&numSeats="+numSeats
+		      }).then(function mySuccess(response) {
+		        console.log("sign up successful");
+		      }, function myError(response) {
+		        console.log("sign up failed");
+		      });
+
+	      }
       }, function myError(response) {
         console.log("sign up failed");
       });
+
     } else {
       console.log("you shouldn't be able to sign up");
     }
@@ -159,7 +171,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (trip !== undefined) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insert-Passenger?trip_id="+trip+"&email="+email
       }).then(function mySuccess(response) {
         console.log("edit successful");
       }, function myError(response) {
@@ -179,7 +191,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       endTime !== undefined && startTime < endTime) {
       $http({
         method: 'POST', 
-        url : "/insert?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
+        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
       }).then(function mySuccess(response) {
       	trip_id_counter++;
         console.log("edit successful");
