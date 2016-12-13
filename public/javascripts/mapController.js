@@ -253,7 +253,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       } else {
         $http({
             method: 'GET', 
-            url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
+            url : "/trip-search?trip_id=" + tripID + "&depart=.&arrive=.&st1=.&st2=." 
           }).then(function mySuccess(response) {
             alert("success");
           }, function myError(response) {
@@ -273,7 +273,25 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
+            $scope.userInfo = "e-mail: " + response['data'].split(",")[0] + ", username: " + response['data'].split(",")[1];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
+      $http({
+            method: 'GET', 
+            url : "/get-Drivers?email=" + $scope.signin_email
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            if(response['data'].split(",")[0] == "."){
+              $scope.useInfo += " number of seats in car: N/A";
+            }
+            else{
+              $scope.userInfo += " number of seats in car: " + response['data'].split(",")[1];
+            }
+            
           }, function myError(response) {
             console.log("failure");
             console.log(response);
