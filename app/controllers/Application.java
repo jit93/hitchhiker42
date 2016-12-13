@@ -202,8 +202,8 @@ public class Application extends Controller {
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
-public static Result getTripsList(String tripId, String depart, String arriv, String st) throws SQLException {
-         hitchhiker42.TripInfo trips = hitchhiker42.getTrips(tripId, depart, arriv, st);
+public static Result getTripsList(String tripId, String depart, String arriv, String st1, String st2) throws SQLException {
+         hitchhiker42.TripInfo trips = hitchhiker42.getTrips(tripId, depart, arriv, st1, st2);
          if (trips == null) {
              return ok(error.render("No trips match search criteria"));
          } else{
