@@ -8,50 +8,51 @@ import java.util.ArrayList;
 public class hitchhiker42 {
 
     //TRIPS IS NOT A VARIABLE TYPE?
-    // public static ArrayList<Trips> getTrips(int t_id, String dep, String arr, String startd1, String startd2) throws SQLException {
-    //     Connection connection = null;
-    //     Trips trips = null;
-    //     try {
-    //         connection = DB.getConnection();
-    //         // retrieve basic info:
-    //         PreparedStatement statement = connection
-    //             .prepareStatement("SELECT * FROM Trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND start_date_time >= ? AND start_date_time <= ?");
-    //         statement.setString(1, t_id);
-    //         statement.setString(2, dep);
-    //         statement.setString(3, arr);
-    //         statement.setString(4, startd1);
-    //         statement.setString(5, startd2);
-    //         ResultSet rs = statement.executeQuery();
-    //         if (! rs.next()) {
-    //             return null;
-    //         }
-    //         ArrayList<Integer> trip_ids = new ArrayList<Integer>();
-    //         ArrayList<String> curs = new ArrayList<String>();
-    //         ArrayList<String> dests = new ArrayList<String>();            
-    //         ArrayList<String> s_ds = new ArrayList<String>();
-    //         while (rs.next()){
-    //             Integer trip_id = rs.getString(1);
-    //             trip_ids.add(trip_id);
-    //             String cur = rs.getString(2);
-    //             curs.add(cur);
-    //             String dest = rs.getString(3);
-    //             dests.add(dest);
-    //             String s_d = rs.getString(4);
-    //             s_ds.add(s_d);
-    //         }
-    //         rs.close();
-    //         statement.close();            
-    //         trips = new Trips(trip_ids, curs, dests, s_ds);
-    //     } finally {
-    //         if (connection != null) {
-    //             try {
-    //                 connection.close();
-    //             } catch (Exception e) {
-    //             }
-    //         }
-    //     }
-    //     return trips;
-    // }
+    public static ArrayList<Trips> getTrips(String t_id, String dep, String arr, String startd1, String startd2) throws SQLException {
+         Connection connection = null;
+         Trips trips = null;
+         try {
+             connection = DB.getConnection();
+             // retrieve basic info:
+             int t_id_int = (int)t_id;
+             PreparedStatement statement = connection
+                 .prepareStatement("SELECT * FROM Trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND start_date_time >= ? AND start_date_time <= ?");
+             statement.setInt(1, t_id_int);
+             statement.setString(2, dep);
+             statement.setString(3, arr);
+             statement.setString(4, startd1);
+             statement.setString(5, startd2);
+             ResultSet rs = statement.executeQuery();
+             if (! rs.next()) {
+                 return null;
+             }
+             ArrayList<Integer> trip_ids = new ArrayList<Integer>();
+             ArrayList<String> curs = new ArrayList<String>();
+            ArrayList<String> dests = new ArrayList<String>();            
+             ArrayList<String> s_ds = new ArrayList<String>();
+             while (rs.next()){
+                 Integer trip_id = rs.getString(1);
+                 trip_ids.add(trip_id);
+                 String cur = rs.getString(2);
+                 curs.add(cur);
+                 String dest = rs.getString(3);
+                 dests.add(dest);
+                 String s_d = rs.getString(4);
+                 s_ds.add(s_d);
+             }
+             rs.close();
+             statement.close();            
+             trips = new Trips(trip_ids, curs, dests, s_ds);
+         } finally {
+             if (connection != null) {
+                try {
+                     connection.close();
+                 } catch (Exception e) {
+                 }
+             }
+         }
+         return trips;
+     }
 //--------------------------------------------------------------------------------------------------------------------------------
 //     public static boolean signIn(String em, String pass) throws SQLException {
 //         Connection connection = null;
@@ -83,61 +84,59 @@ public class hitchhiker42 {
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean insertUserInfo(String email, String name, String passwordHash) throws SQLException{
-//         //email, name, password
-//         Connection connection = null;
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-//             statement = connection
-//                 .prepareStatement("INSERT INTO users VALUES(?, ?, ?)");
-//                 statement.setString(1, email);
-//                 statement.setString(2, name);
-//                 statement.setString(3, passwordHash);
-//                 statement.executeUpdate();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return true;
-//     }
+     public static boolean insertUserInfo(String email, String name, String passwordHash) throws SQLException{
+         //email, name, password
+         Connection connection = null;
+         try {
+             connection = DB.getConnection();
+             PreparedStatement statement = connection
+                 .prepareStatement("INSERT INTO users VALUES(?, ?, ?)");
+                 statement.setString(1, email);
+                 statement.setString(2, name);
+                 statement.setString(3, passwordHash);
+                 statement.executeUpdate();
+             statement.close();
+         } finally {
+             if (connection != null) {
+                 try {
+                     connection.close();
+                 } catch (Exception e) {
+                 }
+             }
+         }
+         return true;
+     }
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean updateUserInfo(String email, String newName, String newPasswordHash, boolean delete) throws SQLException{
-//         //email, name, password
-//         Connection connection = null;
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-//             if(!delete){
-//                 statement = connection
-//                 .prepareStatement("UPDATE users SET name = ?, passwordHash = ?");
-//             statement.setString(1, newName);
-//             statement.setString(2, newPasswordHash);
-//             statement.executeUpdate();
-//             }
-//             else{
-//                 statement = connection
-//                 .prepareStatement("DELETE FROM users WHERE email = ?");
-//             statement.setString(1, email);
-//             statement.executeUpdate();
-//             }
+         public static boolean updateUserInfo(String email, String newName, String newPasswordHash, boolean delete) throws SQLException{
+         //email, name, password
+         Connection connection = null;
+         try {
+             connection = DB.getConnection();
+             if(!delete){
+                 PreparedStatement statement = connection
+                 .prepareStatement("UPDATE users SET name = ?, passwordHash = ?");
+             statement.setString(1, newName);
+             statement.setString(2, newPasswordHash);
+             statement.executeUpdate();
+             }
+             else{
+                 PreparedStatement statement = connection
+                 .prepareStatement("DELETE FROM users WHERE email = ?");
+             statement.setString(1, email);
+             statement.executeUpdate();
+             }
             
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return true;
-//     }
+             statement.close();
+         } finally {
+             if (connection != null) {
+                 try {
+                     connection.close();
+                 } catch (Exception e) {
+                 }
+             }
+         }
+         return true;
+     }
 // //--------------------------------------------------------------------------------------------------------------------------------
 //     public static boolean insertUsersWithCar(String email, int numseats) throws SQLException{
 //         Connection connection = null;
@@ -296,23 +295,23 @@ public class hitchhiker42 {
 //         return true;
 //     }
 // //---------------------------------------------------------------------------------------------------------------
-//     public static class TripInfo {
-//         public Integer tripId = null;
-//         public String currentLocation = null;
-//         public String destination = null;
-//         public String startTime = null;
-//         public TripInfo() {
-//         }
-//         public TripInfo(Integer tripId,
-//                         String currentLocation,
-//                         String destination,
-//                         String startTime) {
-//             this.tripId = tripId;
-//             this.currentLocation = currentLocation;
-//             this.destination = destination;
-//             this.startTime = startTime;
-//         }
-//     }
+     public static class TripInfo {
+         public Integer tripId = null;
+         public String currentLocation = null;
+         public String destination = null;
+         public String startTime = null;
+         public TripInfo() {
+         }
+         public TripInfo(Integer tripId,
+                         String currentLocation,
+                         String destination,
+                         String startTime) {
+             this.tripId = tripId;
+             this.currentLocation = currentLocation;
+             this.destination = destination;
+             this.startTime = startTime;
+         }
+     }
 
 
 //     public static boolean insertIntoTrips(TripInfo tripInfo)
