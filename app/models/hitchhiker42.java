@@ -14,7 +14,7 @@ public class hitchhiker42 {
          try {
              connection = DB.getConnection();
              // retrieve basic info:
-             int t_id_int = (int)t_id;
+             int t_id_int = Integer.parseInt(t_id);
              PreparedStatement statement = connection
                  .prepareStatement("SELECT * FROM Trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND start_date_time >= ? AND start_date_time <= ?");
              statement.setInt(1, t_id_int);
@@ -295,23 +295,23 @@ public class hitchhiker42 {
 //         return true;
 //     }
 // //---------------------------------------------------------------------------------------------------------------
-     public static class TripInfo {
-         Integer tripId = null;
-         String currentLocation = null;
-         String destination = null;
-         String startTime = null;
-         public TripInfo() {
-         }
-         public TripInfo(Integer tripId,
-                         String currentLocation,
-                         String destination,
-                         String startTime) {
-             this.tripId = tripId;
-             this.currentLocation = currentLocation;
-             this.destination = destination;
-             this.startTime = startTime;
-         }
-     }
+//      public static class TripInfo {
+//          Integer tripId = null;
+//          String currentLocation = null;
+//          String destination = null;
+//          String startTime = null;
+//          public TripInfo() {
+//          }
+//          public TripInfo(Integer tripId,
+//                          String currentLocation,
+//                          String destination,
+//                          String startTime) {
+//              this.tripId = tripId;
+//              this.currentLocation = currentLocation;
+//              this.destination = destination;
+//              this.startTime = startTime;
+//          }
+//      }
 
 
 //     public static boolean insertIntoTrips(TripInfo tripInfo)
@@ -495,24 +495,24 @@ public class hitchhiker42 {
         return userInfo;
     }
 
-//      public static class TripsInfo {
+      public static class TripsInfo {
 
-//         public ArrayList<Integer> trip_ids = null;
-//         public ArrayList<String> depart_locs = null;
-//         public ArrayList<String> arrive_locs = null;
-//         public ArrayList<String> depart_times = null;
-//         public TripsInfo() {
-//         }
-//         public TripsInfo(ArrayList<Integer> trip_ids,
-//         	ArrayList<String> depart_locs,
-//         	ArrayList<String> arrive_locs,
-//         	ArrayList<String> depart_times) {
-//             this.trip_ids = trip_ids;
-//             this.depart_locs = depart_locs;
-//             this.arrive_locs = arrive_locs;
-//             this.depart_times = depart_times;
-//         }
-//     }
+         public ArrayList<Integer> trip_ids = null;
+         public ArrayList<String> depart_locs = null;
+         public ArrayList<String> arrive_locs = null;
+         public ArrayList<String> depart_times = null;
+         public TripsInfo() {
+         }
+         public TripsInfo(ArrayList<Integer> trip_ids,
+         	ArrayList<String> depart_locs,
+         	ArrayList<String> arrive_locs,
+         	ArrayList<String> depart_times) {
+             this.trip_ids = trip_ids;
+             this.depart_locs = depart_locs;
+             this.arrive_locs = arrive_locs;
+             this.depart_times = depart_times;
+         }
+     }
     
     public static class DrinkerInfo {
         public String name = null;
