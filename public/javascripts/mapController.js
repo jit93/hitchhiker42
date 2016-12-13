@@ -1,14 +1,12 @@
 var myApp = angular.module('myApp', ["ngQuickDate"]);
 
 myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
-  	$scope.test = 'Hola!';
   	 //Setting the default map position
  	var pos = {lat: 36.0014258, lng: -78.9382286};
   var zoom = 12;
  	var map;
   var isSignedIn = false;
   var currentLocKnown = false;
-  var base = "localhost:9000";
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -78,20 +76,26 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         console.log("shouldn't search  trips, invalid ")
     } else {
         console.log("should have rest post to server");
-        var url       = "/trip-search";
-        var test      = {"test":"hi"};
         var json      = {"first-time":firstDay, "second-time":secondDay};
         var parameter = JSON.stringify(json);
-      $http.post(base+url, parameter).success(function(data, status, headers, config) {
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("success");
-        console.log(data);
-      }).error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        console.log("failure");
-      });
+        $http({
+            method: 'GET', 
+            url : "/trip-search"
+          }).then(function mySuccess(response) {
+            console.log("success");
+          }, function myError(response) {
+            console.log("failure");
+          });
+      // $http.get(base+url).success(function(data, status, headers, config) {
+      //   // this callback will be called asynchronously
+      //   // when the response is available
+      //   console.log("success");
+      //   console.log(data);
+      // }).error(function(data, status, headers, config) {
+      //   // called asynchronously if an error occurs
+      //   // or server returns response with an error status.
+      //   console.log("failure");
+      // });
     }
   }
 

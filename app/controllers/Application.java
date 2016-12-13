@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import play.*;
 import play.mvc.*;
 import play.data.*;
+import play.libs.*;
+import play.libs.Json;
+
+//import org.codehaus.jackson.JsonNode;
+//import org.codehaus.jackson.node.ObjectNode;
 
 import views.html.*;
 
@@ -199,7 +204,12 @@ public class Application extends Controller {
 //         }
 //     }
 
-
+    public static Result test() throws SQLException {
+        //System.out.println("hello world");
+        //JsonNode result = Json.newObject();
+        //result.put("status", "OK");
+        return ok("hello world");
+    }
 
 
     public static Result index() throws SQLException {
