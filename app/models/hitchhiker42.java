@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class hitchhiker42 {
 
     //TRIPS IS NOT A VARIABLE TYPE?
-    public static ArrayList<Trips> getTrips(String t_id, String dep, String arr, String startd1, String startd2) throws SQLException {
+    public static TripInfo getTrips(String t_id, String dep, String arr, String startd1, String startd2) throws SQLException {
          Connection connection = null;
          TripInfo trips = null;
          try {
