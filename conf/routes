@@ -1,7 +1,11 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
-
+POST  /insertTrip       controllers.Application.insertIntoTrips(tripId:String, currentLocation:String, destination:String, startTime:String)
+PUT   /updateTrips      controllers.Application.updateTripInfo(tripId:String, currentLocation:String, destination:String, startTime:String, delete:String)
+POST  /insertUser       controllers.Application.insertIntoUserInfo(email:String, name:String, password:String)
+PUT   /updateUser       controllers.Application.updateUserInfo(email:String, name:String, password:String, delete:String)
+controllers.Application.
 GET     /                           controllers.Application.index()
 GET	/drinker/:name              controllers.Application.viewDrinker(name:String)
 GET     /edit-drinker/:name         controllers.Application.editDrinker(name:String)
