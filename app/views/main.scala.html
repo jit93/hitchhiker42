@@ -33,6 +33,8 @@
             <p class="nav-text">Make a New Trip</p>
             <p>Starting Location: Current Location</p>
             <p>Ending Location: {{destination}}</p>
+            <quick-datepicker ng-model='newTripDate1'></quick-datepicker>
+            <quick-datepicker ng-model='newTripDate2'></quick-datepicker>
             <div><button ng-click="makeTrip()">Make Trip</button></div>
           </div>
           <div class="sign-in">
