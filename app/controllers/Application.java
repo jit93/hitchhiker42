@@ -202,14 +202,14 @@ public class Application extends Controller {
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static Result getTripsList(int tripId, String depart, String arriv, String st) throws SQLException {
-//         hitchhiker42.Trips trips = hitchhiker42.getTrips(tridId, depart, arriv, st);
-//         if (trips == null) {
-//             return ok(error.render("No trips match search criteria"));
-//         } else{
-//             return ok(Trips.render(trips));
-//         }
-//     }
+public static Result getTripsList(String tripId, String depart, String arriv, String st) throws SQLException {
+         hitchhiker42.Trips trips = hitchhiker42.getTrips(tripId, depart, arriv, st);
+         if (trips == null) {
+             return ok(error.render("No trips match search criteria"));
+         } else{
+             return ok(trips);
+         }
+     }
 
     public static Result test2(String stringDict) throws SQLException {
         //System.out.println("hello world");
