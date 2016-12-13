@@ -204,6 +204,14 @@ public class Application extends Controller {
 //         }
 //     }
 
+    public static Result test2(String stringDict) throws SQLException {
+        //System.out.println("hello world");
+        //JsonNode result = Json.newObject();
+        //result.put("status", "OK");
+        System.out.println("*********************************");
+        return ok("hello world");
+    }
+
     public static Result test() throws SQLException {
         //System.out.println("hello world");
         //JsonNode result = Json.newObject();

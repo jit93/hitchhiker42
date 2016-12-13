@@ -99,6 +99,22 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     }
   }
 
+
+  $scope.testfunction = function() {
+    console.log("testing function");
+    var testvariable = {};
+    testvariable["example"] = "123";
+    var parameter = JSON.stringify({"stringified": "testing123"});
+    var url = "/test?stringified=" + parameter;
+    
+    $http.post(url, parameter).success(function mySuccess(response) {
+            console.log("success");
+          }).error(function myError(response) {
+            console.log("failure");
+          })
+
+  }
+
   // This example adds a search box to a map, using the Google Place Autocomplete
   // feature. People can enter geographical searches. The search box will return a
   // pick list containing a mix of places and predicted search terms.
