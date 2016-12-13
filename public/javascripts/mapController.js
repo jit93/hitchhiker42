@@ -7,6 +7,9 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
  	var map;
   var isSignedIn = false;
   var currentLocKnown = false;
+  var listOfMarkers = [];
+  var currentTrip = $scope.currentTrip;
+
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -49,6 +52,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 
     // Add the autocomplete button
     initAutocomplete();
+    addMarker();
   };
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -58,13 +62,84 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
                             'Error: Your browser doesn\'t support geolocation.');
   }
 
-  $scope.addMarker = function() {
+  function addMarker() {
   	console.log("should add a marker")
   	var marker = new google.maps.Marker({
       position: pos,
       map: map,
       title: 'Test'
+    });
+    listOfMarkers.push(marker);
+    marker.addListener('click', function(){
+      currentTrip=marker.title;
+      console.log(currentTrip);
+      $scope.$apply();
+    });
+  };
+
+  $scope.signup = function() {
+    var email     = $scope.signup_email;
+    var password  = $scope.signup_password;
+    var hasCar    = $scope.signup_has_car;
+    var username  = $scope.signup_username;
+    var numSeats  = parseInt($scope.signup_number_of_seats);
+    if (hasCar == undefined) {
+      hasCar = false;
+    }
+    if (email !== undefined && password !== undefined &&
+     numSeats !== undefined && numSeats >= 0) {
+      $http({
+        method: 'POST', 
+        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+      }).then(function mySuccess(response) {
+        console.log("sign up successful");
+      }, function myError(response) {
+        console.log("sign up failed");
       });
+    } else {
+      console.log("you shouldn't be able to sign up");
+    }
+  }
+
+  $scope.signin = function() {
+    var email     = $scope.signin_email;
+    var password  = $scope.signin_password;
+    if (email !== undefined && password !== undefined) {
+      $http({
+        method: 'POST', 
+        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+      }).then(function mySuccess(response) {
+        console.log("sign in successful");
+      }, function myError(response) {
+        console.log("sign in failed");
+      });
+    } else {
+      console.log("you shouldn't be able to sign up");
+    }
+  }
+
+  $scope.edit = function() {
+    var email     = $scope.edit_email;
+    var password  = $scope.edit_password;
+    var hasCar    = $scope.edit_has_car;
+    var username  = $scope.edit_username;
+    var numSeats  = parseInt($scope.edit_number_of_seats);
+    if (hasCar == undefined) {
+      hasCar = false;
+    }
+    if (email !== undefined && password !== undefined &&
+     numSeats !== undefined && numSeats >= 0) {
+      $http({
+        method: 'POST', 
+        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+      }, function myError(response) {
+        console.log("edit failed");
+      });
+    } else {
+      console.log("you shouldn't be able to edit");
+    }
   }
 
   $scope.searchTrips = function() {
@@ -166,7 +241,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25)
         };
-
+        $scope.destination = places.formatted_address;
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
