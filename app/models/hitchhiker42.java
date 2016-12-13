@@ -170,7 +170,7 @@ public class hitchhiker42 {
                 PreparedStatement statement = connection
                 .prepareStatement("UPDATE usersWithCar VALUES(?, ?)");
                 statement.setString(1, email);
-                statement.setInt(2, numseats);
+                statement.setInt(2, numSeats);
                 statement.executeUpdate();
                 statement.close();
             }
