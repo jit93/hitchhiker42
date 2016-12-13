@@ -193,13 +193,24 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'POST', 
         url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
       }).then(function mySuccess(response) {
-      	trip_id_counter++;
         console.log("edit successful");
+        $http({
+        method: 'POST', 
+        url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+      }, function myError(response) {
+        console.log("edit failed");
+        trip_id_counter++;
+      });
+    } else {
+      console.log("you shouldn't be able to make a new trip");
       }, function myError(response) {
         console.log("edit failed");
       });
     } else {
       console.log("you shouldn't be able to make a new trip");
+
     }
   }
 
