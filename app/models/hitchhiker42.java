@@ -10,7 +10,7 @@ public class hitchhiker42 {
     //TRIPS IS NOT A VARIABLE TYPE?
     public static ArrayList<Trips> getTrips(String t_id, String dep, String arr, String startd1, String startd2) throws SQLException {
          Connection connection = null;
-         Trips trips = null;
+         TripInfo trips = null;
          try {
              connection = DB.getConnection();
              // retrieve basic info:
@@ -28,10 +28,10 @@ public class hitchhiker42 {
              }
              ArrayList<Integer> trip_ids = new ArrayList<Integer>();
              ArrayList<String> curs = new ArrayList<String>();
-            ArrayList<String> dests = new ArrayList<String>();            
+             ArrayList<String> dests = new ArrayList<String>();            
              ArrayList<String> s_ds = new ArrayList<String>();
              while (rs.next()){
-                 Integer trip_id = rs.getString(1);
+                 Integer trip_id = rs.getInt(1);
                  trip_ids.add(trip_id);
                  String cur = rs.getString(2);
                  curs.add(cur);
@@ -42,7 +42,7 @@ public class hitchhiker42 {
              }
              rs.close();
              statement.close();            
-             trips = new Trips(trip_ids, curs, dests, s_ds);
+             trips = new TripInfo(trip_ids, curs, dests, s_ds);
          } finally {
              if (connection != null) {
                 try {
@@ -296,10 +296,10 @@ public class hitchhiker42 {
 //     }
 // //---------------------------------------------------------------------------------------------------------------
      public static class TripInfo {
-         public Integer tripId = null;
-         public String currentLocation = null;
-         public String destination = null;
-         public String startTime = null;
+         Integer tripId = null;
+         String currentLocation = null;
+         String destination = null;
+         String startTime = null;
          public TripInfo() {
          }
          public TripInfo(Integer tripId,
