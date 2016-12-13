@@ -330,17 +330,17 @@ public class hitchhiker42 {
             connection = DB.getConnection();
             if (delete){
                 PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
-                statement.setInt(1, tripInfo.tripId);
+                statement.setInt(1, tripInfo.trip_ids.get(0));
                 statement.executeUpdate();
                 statement.close();
                 connection.commit();
             }
             else{
             PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
-            statement.setString(1, tripInfo.destination);
-            statement.setString(2, tripInfo.currentLocation);
-            statement.setString(3, tripInfo.startTime);
-            statement.setInt(4, tripInfo.tripId);
+            statement.setString(1, tripInfo.arrive_locs.get(0));
+            statement.setString(2, tripInfo.depart_locs.get(0));
+            statement.setString(3, tripInfo.depart_times.get(0));
+            statement.setInt(4, tripInfo.trip_ids.get(0));
             success = (statement.executeUpdate() == 1);
             statement.close();
             if (! success){
