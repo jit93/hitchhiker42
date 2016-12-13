@@ -190,27 +190,27 @@ public class hitchhiker42 {
 //         return true;
 //     }
 // //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean insertIntoPassengers(int trip_id, String email) throws SQLException{
-//         Connection connection = null;
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
-//             statement = connection
-//                 .prepareStatement("INSERT INTO passengers VALUES(?, ?)");
-//                 statement.setString(1, trip_id);
-//                 statement.setString(2, email);
-//                 statement.executeUpdate();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return true;
-//     }
+    public static boolean insertIntoPassengers(int trip_id, String email) throws SQLException{
+        Connection connection = null;
+        try {
+            connection = DB.getConnection();
+            Statement statement = connection.createStatement();
+            statement = connection
+                .prepareStatement("INSERT INTO passengers VALUES(?, ?)");
+                statement.setInt(1, trip_id);
+                statement.setString(2, email);
+                statement.executeUpdate();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return true;
+    }
 // //--------------------------------------------------------------------------------------------------------------------------------
 //     public static boolean updatePassengers(int trip_id, String email, boolean delete) throws SQLException{
 //         Connection connection = null;

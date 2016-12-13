@@ -69,17 +69,17 @@ public class Application extends Controller {
 //     }
 
 
-//     public static Result insertIntoPassengers(int trip_id, String email) throws SQLException {
-//         //check to sanitize inputs
+    public static Result insertIntoPassengers(String trip_id, String email) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.insertIntoPassengers(trip_id, email);
-//         if (success) {
-//             return ok(edit.render("trip added successfull"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        int trip_id_int = Integer.parseInt(trip_id);
+        boolean success = hitchhiker42.insertIntoPassengers(trip_id_int, email);
+        if (success) {
+            return ok("trip added successfull");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 //     //FIGURE OUT WHAT IS WRONG WITH THIS, SAYS EXPECTS A .CLASS
 //     public static Result updatePassengers(int trip_id, String email, boolean delete) throws SQLException {
