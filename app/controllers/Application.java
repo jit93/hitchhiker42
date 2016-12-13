@@ -43,30 +43,33 @@ public class Application extends Controller {
 
 
 
-//     public static Result insertIntoUserInfo(String email, String name, String password) throws SQLException {
-//         //check to sanitize inputs
+    public static Result insertIntoUserInfo(String email, String name, String password) throws SQLException {
+        //check to sanitize inputs
 
 
-//         boolean success = hitchhiker42.insertUserInfo(email, name, password);
-//         if (success) {
-//             return ok(edit.render("success, logging in..."));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        boolean success = hitchhiker42.insertUserInfo(email, name, password);
+        if (success) {
+            return ok("success, user inserted into db");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
-//     public static Result updateUserInfo(String email, String name, String password, boolean delete) throws SQLException {
-//         //check to sanitize inputs
+    public static Result updateUserInfo(String email, String name, String password, String delete) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.updateUserInfo(email, name, password, delete);
-//         if (success) {
-//             return ok(edit.render("success, user info updated"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        boolean delete_bool = true;
+        if(delete.equalsIgnoreCase("false")){
+            delete_bool = false;
+        }
+        boolean success = hitchhiker42.updateUserInfo(email, name, password, delete_bool);
+        if (success) {
+            return ok("success, user info updated");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result insertIntoPassengers(String trip_id, String email) throws SQLException {
@@ -187,7 +190,7 @@ public class Application extends Controller {
         //check to sanitize inputs
         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
         if (userInfo != null) {
-            return ok(userInfo);
+            return ok(userInfo.toString());
         } else{
             return ok(error.render("error try again"));
         }
