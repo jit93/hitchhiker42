@@ -58,6 +58,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     addMarker();
   };
 
+  function getTrips() {
+
+  }
+
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
       infoWindow.setContent(browserHasGeolocation ?
@@ -76,6 +80,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     marker.addListener('click', function(){
       currentTrip=marker.title;
       console.log(currentTrip);
+      $scope.currentTrip = currentTrip;
       $scope.$apply();
     });
   };
@@ -160,14 +165,17 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         console.log("edit failed");
       });
     } else {
-      console.log("you shouldn't be able to edit");
+      console.log("you shouldn't be add yourself to a trip");
     }
   }
 
   $scope.makeTrip = function() {
     var start       = currentLocation;
     var destination = destinationLocation;
-    if (start !== undefined && destination !== undefined) {
+    var startTime   = $scope.newTripDate1;
+    var endTime     = $scope.newTripDate2;
+    if (start !== undefined && destination !== undefined && startTime !== undefined &&
+      endTime !== undefined && startTime < endTime) {
       $http({
         method: 'POST', 
         url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
@@ -177,7 +185,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         console.log("edit failed");
       });
     } else {
-      console.log("you shouldn't be able to edit");
+      console.log("you shouldn't be able to make a new trip");
     }
   }
 
@@ -200,33 +208,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }, function myError(response) {
             console.log("failure");
           });
-      // $http.get(base+url).success(function(data, status, headers, config) {
-      //   // this callback will be called asynchronously
-      //   // when the response is available
-      //   console.log("success");
-      //   console.log(data);
-      // }).error(function(data, status, headers, config) {
-      //   // called asynchronously if an error occurs
-      //   // or server returns response with an error status.
-      //   console.log("failure");
-      // });
     }
-  }
-
-
-  $scope.testfunction = function() {
-    console.log("testing function");
-    var testvariable = {};
-    testvariable["example"] = "123";
-    var parameter = JSON.stringify({"stringified": "testing123"});
-    var url = "/test?stringified=" + parameter;
-    
-    $http.post(url, parameter).success(function mySuccess(response) {
-            console.log("success");
-          }).error(function myError(response) {
-            console.log("failure");
-          })
-
   }
 
   // This example adds a search box to a map, using the Google Place Autocomplete
@@ -298,6 +280,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         }
       });
       map.fitBounds(bounds);
+      $scope.$apply();
     });
   }
 }]);
