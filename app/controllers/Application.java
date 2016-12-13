@@ -206,7 +206,7 @@ public class Application extends Controller {
         if (passengerEmails != null) {
             return ok(passengerEmails.toString());
         } else{
-            return ok(error.render("error try again"));
+            return ok("null");
         }
     }
 
@@ -226,7 +226,7 @@ public class Application extends Controller {
         if (success) {
             return ok(email);
         } else{
-            return ok(error.render("Either incorrect email or password"));
+            return ok("null");
         }
     }
 
@@ -237,7 +237,8 @@ public static Result getTripsList(String tripId, String depart, String arriv, St
          if (trips == null) {
              return ok(error.render("No trips match search criteria"));
          } else{
-             return ok("hiii");
+             String hi = "" + trips.trip_ids.toString() + "|" + trips.depart_locs.toString() + "|" + trips.arrive_locs.toString() + "|" + trips.depart_times.toString() + "";
+             return ok(hi);
          }
      }
 
