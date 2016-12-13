@@ -14,7 +14,7 @@ public class hitchhiker42 {
          try {
              connection = DB.getConnection();
              // retrieve basic info:
-             int t_id_int = (int)t_id;
+             int t_id_int = Integer.parseInt(t_id);
              PreparedStatement statement = connection
                  .prepareStatement("SELECT * FROM Trips WHERE trip_id = ? AND current_location = ? AND destination = ? AND start_date_time >= ? AND start_date_time <= ?");
              statement.setInt(1, t_id_int);
