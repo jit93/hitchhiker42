@@ -101,7 +101,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'POST', 
         url : "/insertUser?email="+email+"&name="+username+"&password="+password
       }).then(function mySuccess(response) {
-        console.log("sign up successful");
+        alert("sign up successful");
         userEmail = email;
         $scope.isSignedIn = true;
 	      if(hasCar){
@@ -109,18 +109,18 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
 		        method: 'POST', 
 		        url : "/insertCarUsers?email="+email+"&numSeats="+numSeats
 		      }).then(function mySuccess(response) {
-		        console.log("sign up successful");
+		        alert("sign up successful");
 		      }, function myError(response) {
-		        console.log("sign up failed");
+		        alert("sign up failed from the server");
 		      });
 
 	      }
       }, function myError(response) {
-        console.log("sign up failed");
+        alert("sign up failed from the server");
       });
 
     } else {
-      console.log("you shouldn't be able to sign up");
+      alert("Please fill all required fields");
     }
   }
 
@@ -132,14 +132,14 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'POST', 
         url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
-        console.log("sign in successful");
+        alert("sign in successful");
         userEmail = email;
         $scope.isSignedIn = true;
       }, function myError(response) {
-        console.log("sign in failed");
+        alert("sign in failed from the server");
       });
     } else {
-      console.log("you shouldn't be able to sign up");
+      alert("Please fill all required fields");
     }
   }
 
@@ -152,22 +152,17 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (hasCar == undefined) {
       hasCar = false;
     }
-	console.log(hasCar);
-	console.log(email);
-	console.log(password);
-	console.log(numSeats);
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
 	 if(hasCar) { //PUT request to UsersWithCar
 	 	var seats = numSeats.toString();
-		console.log(seats);
 	 	$http({
 			method: 'PUT',
 			url: "/updateCarUsers?email="+email+"&numSeats="+seats+"&delete=false"
 		}).then(function mySuccess(response) {
-		console.log("edit with car successful");
+		  alert("edit with car successful");
 		}, function myError(response) {
-			console.log("edit with car failed");
+			alert("edit with car failed");
 		});
 	 }
 	 else { //PUT request to Users
@@ -175,13 +170,13 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'PUT', 
         url : "/updateUser?email="+email+"&name="+username+"&password="+password+"&delete=false"
       }).then(function mySuccess(response) {
-        console.log("edit user successful");
+        alert("edit user successful");
       }, function myError(response) {
-        console.log("edit user failed");
+        alert("edit user failed");
       });
    }
    } else {
-      console.log("you shouldn't be able to edit");
+      alert("Please fill all required fields");
     }
   }
 
@@ -193,12 +188,12 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'POST', 
         url : "/insert-Passenger?trip_id="+trip+"&email="+email
       }).then(function mySuccess(response) {
-        console.log("edit successful");
+        alert("edit successful");
       }, function myError(response) {
-        console.log("edit failed");
+        alert("edit failed");
       });
     } else {
-      console.log("you shouldn't be add yourself to a trip");
+      alert("Please fill all required fields");
     }
   }
 
@@ -213,21 +208,21 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         method: 'POST', 
         url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
       }).then(function mySuccess(response) {
-        console.log("edit successful");
+        alert("edit successful");
         $http({
           method: 'POST', 
           url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
         }).then(function mySuccess(response) {
-          console.log("edit successful");
+          alert("edit successful");
           trip_id_counter++;
         }, function myError(response) {
-          console.log("edit failed");
+          alert("edit failed");
         });
       }, function myError(response) {
-        console.log("edit failed");
+        alert("edit failed");
       });
     } else {
-      console.log("you shouldn't be able to make a new trip");
+      alert("Please fill all required fields");
     }
   }
 
@@ -236,18 +231,17 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     var secondDay = $scope.date2;
     if (firstDay === null || secondDay === null || firstDay === undefined || secondDay === undefined ||
       (firstDay >= secondDay)) {
-        console.log("shouldn't search trips by dates");
+        alert("Please fill all required fields");
     } else {
-        console.log("should have rest post to server");
         var json      = {"first-time":firstDay, "second-time":secondDay};
         var parameter = JSON.stringify(json);
         $http({
             method: 'GET', 
             url : "/trip-search?tridId=*&depart=*&arriv=*&st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
-            console.log("success");
+            alert("success");
           }, function myError(response) {
-            console.log("failure");
+            alert("failure");
           });
     }
   }
@@ -255,36 +249,18 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   $scope.searchTripByID = function() {
       var tripID = $scope.search_trip_by_id;
       if (tripID == undefined) {
-        console.log("shouldn't search trip by id");
+        alert("Please fill all required fields");
       } else {
-        console.log("should search trip by id");
         $http({
             method: 'GET', 
             url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
           }).then(function mySuccess(response) {
-            console.log("success");
+            alert("success");
           }, function myError(response) {
-            console.log("failure");
+            alert("failure");
           });
       }
   }
-
-  // $scope.numUsers = function() {
-  //   console.log("getting total number of users");
-  //   var url = "/getUsers?email=spartanvader93@gmail.com";
-
-  //    $http({
-  //           method: 'GET', 
-  //           url : "/getUsers?email=spartanvader93@gmail.com"
-  //         }).then(function mySuccess(response) {
-  //           console.log("success");
-  //           console.log(response);
-  //           $scope.totalNumUsers = response.length;
-  //         }, function myError(response) {
-  //           console.log("failure");
-  //           console.log(response);
-  //         });
-  // }
 
   $scope.getUserInfo = function() {
     console.log("getting user info");
