@@ -227,7 +227,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   $scope.makeTrip = function() {
     var start       = currentLocation;
     var destination = destinationLocation;
-    var startTime   = $scope.newTripDate1;
+    var startTime   = JSON.stringify($scope.newTripDate1);
     if (start !== undefined && destination !== undefined && startTime !== undefined) {
       $http({
         method: 'POST', 
@@ -236,7 +236,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         alert("edit successful");
         $http({
           method: 'POST', 
-          url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
+          url : "/insertDriven?trip_id="+trip_id_counter+"&email="+userEmail
         }).then(function mySuccess(response) {
           alert("edit successful");
           trip_id_counter++;
@@ -252,8 +252,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.searchTrips = function() {
-    var firstDay  = $scope.date1;
-    var secondDay = $scope.date2;
+    var firstDay  = JSON.stringify($scope.date1);
+    var secondDay = JSON.stringify($scope.date2);
     if (firstDay === null || secondDay === null || firstDay === undefined || secondDay === undefined ||
       (firstDay >= secondDay)) {
         alert("Please fill all required fields");
