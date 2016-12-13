@@ -190,12 +190,11 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.searchTrips = function() {
-    console.log("should be searching trips");
     var firstDay  = $scope.date1;
     var secondDay = $scope.date2;
     if (firstDay === null || secondDay === null || firstDay === undefined || secondDay === undefined ||
       (firstDay >= secondDay)) {
-        console.log("shouldn't search  trips, invalid ")
+        console.log("shouldn't search trips by dates");
     } else {
         console.log("should have rest post to server");
         var json      = {"first-time":firstDay, "second-time":secondDay};
@@ -209,6 +208,23 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             console.log("failure");
           });
     }
+  }
+
+  $scope.searchTripByID = function() {
+      var tripID = $scope.search_trip_by_id;
+      if (tripID == undefined) {
+        console.log("shouldn't search trip by id");
+      } else {
+        console.log("should search trip by id");
+        $http({
+            method: 'GET', 
+            url : "/fdkajfkdasa;jfkdajfd;kasfjd;sakfjd;saljfkdasjf;djla"
+          }).then(function mySuccess(response) {
+            console.log("success");
+          }, function myError(response) {
+            console.log("failure");
+          });
+      }
   }
 
   // This example adds a search box to a map, using the Google Place Autocomplete
