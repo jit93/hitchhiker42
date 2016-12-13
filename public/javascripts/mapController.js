@@ -5,7 +5,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
  	var pos = {lat: 36.0014258, lng: -78.9382286};
   var zoom = 12;
  	var map;
-  var isSignedIn = false;
+  $scope.isSignedIn = false;
   var currentLocKnown = false;
   var listOfMarkers = [];
   var currentTrip = $scope.currentTrip;
@@ -103,6 +103,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       }).then(function mySuccess(response) {
         console.log("sign up successful");
         userEmail = email;
+        $scope.isSignedIn = true;
 	      if(hasCar){
 		      $http({
 		        method: 'POST', 
@@ -133,6 +134,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       }).then(function mySuccess(response) {
         console.log("sign in successful");
         userEmail = email;
+        $scope.isSignedIn = true;
       }, function myError(response) {
         console.log("sign in failed");
       });
@@ -247,18 +249,6 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }, function myError(response) {
             console.log("failure");
           });
-  
-      // $http.get(base+url).success(function(data, status, headers, config) {
-      //   // this callback will be called asynchronously
-      //   // when the response is available
-      //   console.log("success");
-      //   console.log(data);
-      // }).error(function(data, status, headers, config) {
-      //   // called asynchronously if an error occurs
-      //   // or server returns response with an error status.
-      //   console.log("failure");
-      // });
-
     }
   }
 
