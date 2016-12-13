@@ -495,15 +495,15 @@ public class hitchhiker42 {
         return userInfo;
     }
 
-      public static class TripsInfo {
+      public static class TripInfo {
 
          public ArrayList<Integer> trip_ids = null;
          public ArrayList<String> depart_locs = null;
          public ArrayList<String> arrive_locs = null;
          public ArrayList<String> depart_times = null;
-         public TripsInfo() {
+         public TripInfo() {
          }
-         public TripsInfo(ArrayList<Integer> trip_ids,
+         public TripInfo(ArrayList<Integer> trip_ids,
          	ArrayList<String> depart_locs,
          	ArrayList<String> arrive_locs,
          	ArrayList<String> depart_times) {
