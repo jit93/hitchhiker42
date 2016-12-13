@@ -141,6 +141,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     } else {
       console.log("you shouldn't be able to sign up");
     }
+    $scope.getUserInfo();
   }
 
   $scope.edit = function() {
@@ -297,7 +298,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'];
+            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
           }, function myError(response) {
             console.log("failure");
             console.log(response);
