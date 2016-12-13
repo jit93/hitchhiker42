@@ -160,7 +160,7 @@ public class hitchhiker42 {
         return true;
     }
 
-    public static ArrayList<String> getUsersWithCar(String email) throws SQLException{
+    public static ArrayList<String> getUserWithCar(String email) throws SQLException{
         Connection connection = null;
         ArrayList<String> users = new ArrayList<String>();
         try {
@@ -170,11 +170,8 @@ public class hitchhiker42 {
                 .prepareStatement("SELECT * FROM usersWithCar WHERE email = ?");
                 statement.setString(1, email);
                 ResultSet rs = statement.executeQuery();
-                 if (! rs.next()) {
-                     return null;
-                 }
                  while (rs.next()){
-                    String user = rs.getString(1) + ", " + rs.getString(2) + ", " + rs.getString(3);
+                    String user = rs.getString(1) + ", " + rs.getString(2);
                     users.add(user);
                  }
                  rs.close();
@@ -186,6 +183,9 @@ public class hitchhiker42 {
                 } catch (Exception e) {
                 }
             }
+        }
+        if(users.size() == 0){
+            users.add("., .");
         }
         return users;
     }

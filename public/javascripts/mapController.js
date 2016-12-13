@@ -271,7 +271,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
+            $scope.userInfo = "e-mail: " + response['data'].split(",")[0] + ", username: " + response['data'].split(",")[1];
           }, function myError(response) {
             console.log("failure");
             console.log(response);
@@ -279,11 +279,17 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
           });
       $http({
             method: 'GET', 
-            url : url1
+            url : "/get-Drivers?email=" + $scope.signin_email
           }).then(function mySuccess(response) {
             console.log("success");
             console.log(response);
-            $scope.userInfo = response['data'].split(",")[0] + ", " + response['data'].split(",")[1];
+            if(response['data'].split(",")[0] == "."){
+              $scope.useInfo += " number of seats in car: N/A";
+            }
+            else{
+              $scope.userInfo += " number of seats in car: " + response['data'].split(",")[1];
+            }
+            
           }, function myError(response) {
             console.log("failure");
             console.log(response);

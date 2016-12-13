@@ -224,8 +224,10 @@ public class Application extends Controller {
 
     public static Result getUserWithCar(String email) throws SQLException {
         //check to sanitize inputs
-        ArrayList<String> userInfo = hitchhiker42.getUsersWithCar(email);
+        ArrayList<String> userInfo = hitchhiker42.getUserWithCar(email);
         if (userInfo != null) {
+            System.out.println("****************************");
+            System.out.println(userInfo.toString());
             return ok(userInfo.get(0)); //returns first user found;
         } else{
             System.out.println("in the error section of getuserinfo?");
