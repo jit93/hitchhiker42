@@ -25,6 +25,8 @@
           <!-- <p class="sign-in"><a href="sign-in.html">Sign-in</a> or <a href="sign-up.html">Sign-up</a></p> -->
         </div>
         <div class="nav-boxes">
+          <button ng-click="getUserInfo()"> userinfobutton</button>
+            <p> UserInfo: {{userInfo}} </p>
           <div class="current_trip">
             <p>Current Trip: {{currentTrip}}</p>
             <div><button ng-click="addToTrip()">Add to Trip</button></div>
@@ -59,7 +61,7 @@
             <input type="text" ng-model="edit_number_of_seats" placeholder="Enter number of seats">
             <input type="text" ng-model="edit_username" placeholder="Enter username">
             <p>Do you have a car? <input type="checkbox" ng-model="edit_has_car"></p>
-          <div><button ng-click="signup()">Sign up</button></div>
+          <div><button ng-click="edit()">Sign up</button></div>
           </div>
           <div class="search-trip-by-date">
             <p class="nav-text">Search Trip by Date</p>

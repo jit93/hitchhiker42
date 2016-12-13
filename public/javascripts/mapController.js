@@ -150,17 +150,35 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (hasCar == undefined) {
       hasCar = false;
     }
+	console.log(hasCar);
+	console.log(email);
+	console.log(password);
+	console.log(numSeats);
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
+	 if(hasCar) { //PUT request to UsersWithCar
+	 	var seats = numSeats.toString();
+		console.log(seats);
+	 	$http({
+			method: 'PUT',
+			url: "/updateCarUsers?email="+email+"&numSeats="+seats+"&delete=false"
+		}).then(function mySuccess(response) {
+		console.log("edit with car successful");
+		}, function myError(response) {
+			console.log("edit with car failed");
+		});
+	 }
+	 else { //PUT request to Users
       $http({
-        method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        method: 'PUT', 
+        url : "/updateUser?email="+email+"&name="+username+"&password="+password+"&delete=false"
       }).then(function mySuccess(response) {
-        console.log("edit successful");
+        console.log("edit user successful");
       }, function myError(response) {
-        console.log("edit failed");
+        console.log("edit user failed");
       });
-    } else {
+   }
+   } else {
       console.log("you shouldn't be able to edit");
     }
   }
@@ -259,6 +277,42 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
             console.log("failure");
           });
       }
+  }
+
+  // $scope.numUsers = function() {
+  //   console.log("getting total number of users");
+  //   var url = "/getUsers?email=spartanvader93@gmail.com";
+
+  //    $http({
+  //           method: 'GET', 
+  //           url : "/getUsers?email=spartanvader93@gmail.com"
+  //         }).then(function mySuccess(response) {
+  //           console.log("success");
+  //           console.log(response);
+  //           $scope.totalNumUsers = response.length;
+  //         }, function myError(response) {
+  //           console.log("failure");
+  //           console.log(response);
+  //         });
+  // }
+
+  $scope.getUserInfo = function() {
+    console.log("getting user info");
+    var url1 = "/getUsers?email=" + $scope.signin_email;
+    //var url1 = "/getUsers?email=user13@gmail.com";
+
+    $http({
+            method: 'GET', 
+            url : url1
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            $scope.userInfo = response['data'];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
   }
 
   // This example adds a search box to a map, using the Google Place Autocomplete

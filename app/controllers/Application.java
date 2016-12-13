@@ -215,8 +215,9 @@ public class Application extends Controller {
         //check to sanitize inputs
         ArrayList<String> userInfo = hitchhiker42.getUserInfo(email);
         if (userInfo != null) {
-            return ok(userInfo.toString());
+            return ok(userInfo.get(0)); //returns first user found;
         } else{
+            System.out.println("in the error section of getuserinfo?");
             return ok(error.render("error try again"));
         }
     }
