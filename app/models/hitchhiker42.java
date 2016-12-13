@@ -118,15 +118,16 @@ public class hitchhiker42 {
              statement.setString(1, newName);
              statement.setString(2, newPasswordHash);
              statement.executeUpdate();
+             statement.close();
              }
              else{
                  PreparedStatement statement = connection
                  .prepareStatement("DELETE FROM users WHERE email = ?");
              statement.setString(1, email);
              statement.executeUpdate();
+             statement.close();
              }
             
-             statement.close();
          } finally {
              if (connection != null) {
                  try {
@@ -164,21 +165,22 @@ public class hitchhiker42 {
         Connection connection = null;
         try {
             connection = DB.getConnection();
-            Statement statement = connection.createStatement();
+
             if(!delete){
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("UPDATE usersWithCar VALUES(?, ?)");
                 statement.setString(1, email);
                 statement.setInt(2, numseats);
                 statement.executeUpdate();
+                statement.close();
             }
             else{
-                statement = connection
+                PreparedStatement statement = connection
                 .prepareStatement("DELETE FROM usersWithCar WHERE email = ?");
                 statement.setString(1, email);
                 statement.executeUpdate();
+                statement.close();
             }
-            statement.close();
         } finally {
             if (connection != null) {
                 try {
@@ -194,8 +196,7 @@ public class hitchhiker42 {
         Connection connection = null;
         try {
             connection = DB.getConnection();
-            Statement statement = connection.createStatement();
-            statement = connection
+            PreparedStatement statement = connection
                 .prepareStatement("INSERT INTO passengers VALUES(?, ?)");
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
@@ -223,6 +224,7 @@ public class hitchhiker42 {
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
+                statement.close();
             }
             else{
                 PreparedStatement statement = connection
@@ -230,8 +232,8 @@ public class hitchhiker42 {
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
+                statement.close();
             }
-            statement.close();
         } finally {
             if (connection != null) {
                 try {
@@ -274,14 +276,15 @@ public class hitchhiker42 {
                 statement.setInt(1, trip_id);
                 statement.setString(2, email);
                 statement.executeUpdate();
+                statement.close();
             }
             else{
                 PreparedStatement statement = connection
                 .prepareStatement("DELETE FROM isDrivenBy WHERE trip_id = ?");
                 statement.setInt(1, trip_id);
                 statement.executeUpdate();
+                statement.close();
             }
-            statement.close();
         } finally {
             if (connection != null) {
                 try {
