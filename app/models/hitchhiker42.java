@@ -54,33 +54,32 @@ public class hitchhiker42 {
          return trips;
      }
 //--------------------------------------------------------------------------------------------------------------------------------
-//     public static boolean signIn(String em, String pass) throws SQLException {
-//         Connection connection = null;
-//         boolean valid = null;
-//         try {
-//             connection = DB.getConnection();
-//             PreparedStatement statement = connection
-//                 .prepareStatement("SELECT email, passwordHash FROM Users WHERE email = ? AND passwordHash = ?");
-//             statement.setString(1, em);
-//             statement.setString(2, pass);
-//             ResultSet rs = statement.executeQuery();
-//             if (! rs.next()) {
-//                 return 0;
-//             }
+    public static boolean signIn(String email, String password) throws SQLException {
+        Connection connection = null;
+        boolean valid = null;
+        try {
+            connection = DB.getConnection();
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT email, passwordHash FROM Users WHERE email = ? AND passwordHash = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            if (! rs.next()) {
+                return 0;
+            }
 
-
-//             rs.close();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return 1;
-//     }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return 1;
+    }
 
 
 // //--------------------------------------------------------------------------------------------------------------------------------
@@ -341,43 +340,43 @@ public class hitchhiker42 {
 //     }
 
 
-//     public static boolean updateTripInfo(TripInfo tripInfo, boolean delete)
-//         throws SQLException {
-//         Connection connection = null;
-//         boolean success = false;
-//         try{
-//             connection = DB.getConnection();
-//             if (delete){
-//                 PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
-//                 statement.setString(1, tripInfo.tripId);
-//                 statement.executeUpdate();
-//                 statement.close();
-//                 connection.commit();
-//             }
-//             else{
-//             PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
-//             statement.setString(1, tripInfo.destination);
-//             statement.setString(2, tripInfo.currentLocation);
-//             statement.setString(3, tripInfo.startTime);
-//             statement.setString(4, tripInfo.tripId);
-//             success = (statement.executeUpdate() == 1);
-//             statement.close();
-//             if (! success){
-//                 connection.rollback();
-//                 return false;
-//             }
-//             connection.commit();    
-//             }
-//         } finally {
-//             if (connection!=null){
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return success;
-//     }
+    public static boolean updateTripInfo(TripInfo tripInfo, boolean delete)
+        throws SQLException {
+        Connection connection = null;
+        boolean success = false;
+        try{
+            connection = DB.getConnection();
+            if (delete){
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM Trips WHERE trip_id = ?");
+                statement.setInt(1, tripInfo.tripId);
+                statement.executeUpdate();
+                statement.close();
+                connection.commit();
+            }
+            else{
+            PreparedStatement statement = connection.prepareStatement("UPDATE Trips SET destination = ?, current_location = ?, start_date_time = ? WHERE trip_id = ?");
+            statement.setString(1, tripInfo.destination);
+            statement.setString(2, tripInfo.currentLocation);
+            statement.setString(3, tripInfo.startTime);
+            statement.setInt(4, tripInfo.tripId);
+            success = (statement.executeUpdate() == 1);
+            statement.close();
+            if (! success){
+                connection.rollback();
+                return false;
+            }
+            connection.commit();    
+            }
+        } finally {
+            if (connection!=null){
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return success;
+    }
 
 
 
