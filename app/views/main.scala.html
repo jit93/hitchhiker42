@@ -27,11 +27,13 @@
         <div class="nav-boxes">
           <div class="current_trip">
             <p>Current Trip: {{currentTrip}}</p>
+            <div><button ng-click="addToTrip()">Add to Trip</button></div>
           </div>
           <div>
             <p class="nav-text">Make a New Trip</p>
             <p>Starting Location: Current Location</p>
             <p>Ending Location: {{destination}}</p>
+            <div><button ng-click="makeTrip()">Make Trip</button></div>
           </div>
           <div class="sign-in">
             <p class="nav-text">Signing-in</p>

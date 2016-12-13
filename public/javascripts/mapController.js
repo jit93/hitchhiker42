@@ -9,7 +9,8 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var currentLocKnown = false;
   var listOfMarkers = [];
   var currentTrip = $scope.currentTrip;
-
+  var userEmail;
+  var currentLocation;
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -93,6 +94,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
       }).then(function mySuccess(response) {
         console.log("sign up successful");
+        userEmail = email;
       }, function myError(response) {
         console.log("sign up failed");
       });
@@ -107,9 +109,10 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (email !== undefined && password !== undefined) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/signIn?email="+email+"&password="+password
       }).then(function mySuccess(response) {
         console.log("sign in successful");
+        userEmail = email;
       }, function myError(response) {
         console.log("sign in failed");
       });
@@ -129,6 +132,39 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     }
     if (email !== undefined && password !== undefined &&
      numSeats !== undefined && numSeats >= 0) {
+      $http({
+        method: 'POST', 
+        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+      }, function myError(response) {
+        console.log("edit failed");
+      });
+    } else {
+      console.log("you shouldn't be able to edit");
+    }
+  }
+
+  $scope.addToTrip = function() {
+    var trip    = $scope.currentTrip;
+    if (trip !== undefined) {
+      $http({
+        method: 'POST', 
+        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+      }, function myError(response) {
+        console.log("edit failed");
+      });
+    } else {
+      console.log("you shouldn't be able to edit");
+    }
+  }
+
+  $scope.makeTrip = function() {
+    var start       = currentLocation;
+    var destination = $scope.destination;
+    if (start !== undefined && destination !== undefined) {
       $http({
         method: 'POST', 
         url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
