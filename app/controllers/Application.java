@@ -19,15 +19,24 @@ import models.hitchhiker42;
 
 public class Application extends Controller {
 
-    //COMMENTED OUT BECAUSE OF COMMENTED OUT COMMENT IN HITCHHIKER42.JAVA
-    // public static Result insertIntoTrips(Integer tripId, String currentLocation, String destination, String startTime) throws SQLException {
-    //     boolean success = hitchhiker42.insertIntoTrips(new hitchhiker42.TripInfo(tripId, currentLocation, destination, startTime));
-    //     if (success){
-    //         return ok(edit.render("Trip creation successful"));
-    //     } else {
-    //         return ok(error.render("Trip creation unsuccessful"));
-    //     }
-    // }
+    
+    public static Result insertIntoTrips(String tripId, String currentLocation, String destination, String startTime) throws SQLException {
+        int tripId_int = Integer.parseInt(tripId);
+        ArrayList<Integer> tripIds = new ArrayList<Integer>();
+        ArrayList<String> currentLocations = new ArrayList<String>();
+        ArrayList<String> destinations = new ArrayList<String>();
+        ArrayList<String> startTimes = new ArrayList<String>();
+        tripIds.add(tripId_int);
+        currentLocations.add(currentLocation);
+        destinations.add(destination);
+        startTimes.add(startTime);
+        boolean success = hitchhiker42.insertIntoTrips(new hitchhiker42.TripInfo(tripIds, currentLocations, destinations, startTimes));
+        if (success){
+            return ok("Trip creation successful");
+        } else {
+            return ok(error.render("Trip creation unsuccessful"));
+        }
+    }
 //--------------------------------------------------------------------------------------------------------------------------------
     public static Result updateTripInfo(String tripId, String currentLocation, String destination, String startTime, String delete) throws SQLException {
         int tripId_int = Integer.parseInt(tripId);
@@ -36,7 +45,15 @@ public class Application extends Controller {
             delete_bool = false;
         }
 
-        boolean success = hitchhiker42.updateTripInfo((new hitchhiker42.TripInfo(tripId_int, currentLocation, destination, startTime)), delete_bool);
+        ArrayList<Integer> tripIds = new ArrayList<Integer>();
+        ArrayList<String> currentLocations = new ArrayList<String>();
+        ArrayList<String> destinations = new ArrayList<String>();
+        ArrayList<String> startTimes = new ArrayList<String>();
+        tripIds.add(tripId_int);
+        currentLocations.add(currentLocation);
+        destinations.add(destination);
+        startTimes.add(startTime);
+        boolean success = hitchhiker42.updateTripInfo((new hitchhiker42.TripInfo(tripIds, currentLocations, destinations, startTimes)), delete_bool);
         if (success){
             return ok("Success");
         } else {
@@ -205,7 +222,7 @@ public class Application extends Controller {
     }
 // //--------------------------------------------------------------------------------------------------------------------------------
     public static Result signInEntry(String email, String password) throws SQLException {
-        boolean success = signIn(email, password);
+        boolean success = hitchhiker42.signIn(email, password);
         if (success) {
             return ok(email);
         } else{
