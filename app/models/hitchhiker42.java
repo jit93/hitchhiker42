@@ -382,32 +382,33 @@ public class hitchhiker42 {
 
 
 
-//     public static String getDriver(int trip_id) throws SQLException{
-//         Connection connection = null;
-//         String driverEmail = "";
-//         try {
-//             connection = DB.getConnection();
-//             Statement statement = connection.createStatement();
+    public static String getDriver(String trip_id) throws SQLException{
+        Connection connection = null;
+        String driverEmail = "";
+        int trip_id_int = Integer.parseInt(trip_id);
+        System.out.println("in hitchhiker****************************************");
+        try {
+            connection = DB.getConnection();
             
-//             PreparedStatement statement = connection
-//                 .prepareStatement("SELECT email FROM isDrivenBy WHERE trip_id = ?");
-//             statement.setString(1, trip_id);
-//             ResultSet rs = statement.executeQuery();
-//             while (rs.next()) {
-//                 String driverEmail = rs.getString(1);
-//             }
-//             rs.close();
-//             statement.close();
-//         } finally {
-//             if (connection != null) {
-//                 try {
-//                     connection.close();
-//                 } catch (Exception e) {
-//                 }
-//             }
-//         }
-//         return driverEmail;
-//     }
+            PreparedStatement statement = connection
+                .prepareStatement("SELECT email FROM isDrivenBy WHERE trip_id = ?");
+            statement.setInt(1, trip_id_int);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                driverEmail = rs.getString(1);
+            }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+        return driverEmail;
+    }
 
 
 

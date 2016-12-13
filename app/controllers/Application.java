@@ -146,17 +146,17 @@ public class Application extends Controller {
 //     }
 
 
-//     public static Result getDriver(int trip_id) throws SQLException {
-//         //check to sanitize inputs
-
-
-//         String driverEmail = hitchhiker42.getDriver(trip_id);
-//         if (driveremail != null) {
-//             return ok(edit.render(driverEmail));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+    public static Result getDriver(String trip_id) throws SQLException {
+        //check to sanitize inputs
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^getting driver application.java");
+        //Integer intTripId = Integer.parseInt(trip_id);
+        String driverEmail = hitchhiker42.getDriver(trip_id);
+        if (driverEmail != "") {   //CHECK THIS IF STATEMENT
+            return ok(driverEmail);
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
 //     public static Result getPassengers(int trip_id) throws SQLException {
