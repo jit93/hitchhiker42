@@ -264,6 +264,42 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       }
   }
 
+  // $scope.numUsers = function() {
+  //   console.log("getting total number of users");
+  //   var url = "/getUsers?email=spartanvader93@gmail.com";
+
+  //    $http({
+  //           method: 'GET', 
+  //           url : "/getUsers?email=spartanvader93@gmail.com"
+  //         }).then(function mySuccess(response) {
+  //           console.log("success");
+  //           console.log(response);
+  //           $scope.totalNumUsers = response.length;
+  //         }, function myError(response) {
+  //           console.log("failure");
+  //           console.log(response);
+  //         });
+  // }
+
+  $scope.getUserInfo = function() {
+    console.log("getting user info");
+    var url1 = "/getUsers?email=" + $scope.signin_email;
+    //var url1 = "/getUsers?email=user13@gmail.com";
+
+    $http({
+            method: 'GET', 
+            url : url1
+          }).then(function mySuccess(response) {
+            console.log("success");
+            console.log(response);
+            $scope.userInfo = response['data'];
+          }, function myError(response) {
+            console.log("failure");
+            console.log(response);
+            $scope.userInfo = response["data"];
+          });
+  }
+
   // This example adds a search box to a map, using the Google Place Autocomplete
   // feature. People can enter geographical searches. The search box will return a
   // pick list containing a mix of places and predicted search terms.

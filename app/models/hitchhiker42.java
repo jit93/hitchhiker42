@@ -463,7 +463,10 @@ public class hitchhiker42 {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                String information = rs.getString(1);
+                //String information = rs.getString(1);
+                String information = rs.getString(1) +", ";
+                information += rs.getString(2) + ", ";
+                information += rs.getString(3);
                 userInfo.add(information);
             }
             rs.close();
