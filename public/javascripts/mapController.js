@@ -12,6 +12,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
   var userEmail;
   var currentLocation;
   var destinationLocation;
+  var trip_id_counter = 1;
 
  	$scope.initMap = function() {
  		console.log("map should load");
@@ -98,13 +99,25 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
      numSeats !== undefined && numSeats >= 0) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insertUser?email="+email+"&name="+username+"&password="+password
       }).then(function mySuccess(response) {
         console.log("sign up successful");
         userEmail = email;
+	      if(hasCar){
+		      $http({
+		        method: 'POST', 
+		        url : "/insertCarUsers?email="+email+"&numSeats="+numSeats
+		      }).then(function mySuccess(response) {
+		        console.log("sign up successful");
+		      }, function myError(response) {
+		        console.log("sign up failed");
+		      });
+
+	      }
       }, function myError(response) {
         console.log("sign up failed");
       });
+
     } else {
       console.log("you shouldn't be able to sign up");
     }
@@ -158,7 +171,7 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
     if (trip !== undefined) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insert-Passenger?trip_id="+trip+"&email="+email
       }).then(function mySuccess(response) {
         console.log("edit successful");
       }, function myError(response) {
@@ -178,14 +191,26 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
       endTime !== undefined && startTime < endTime) {
       $http({
         method: 'POST', 
-        url : "fkdlasjf;djsakfj;dskajf;dasjfl;kasjlkf;dsa;klfads;kfjsa;ljf;dsjf"
+        url : "/insertTrip?tripId="+trip_id_counter+"&currentLocation="+start+"&destination="+destination+"&startTime="+startT
       }).then(function mySuccess(response) {
         console.log("edit successful");
+        $http({
+        method: 'POST', 
+        url : "/insertDriven?tripId="+trip_id_counter+"&email="+userEmail
+      }).then(function mySuccess(response) {
+        console.log("edit successful");
+      }, function myError(response) {
+        console.log("edit failed");
+        trip_id_counter++;
+      });
+    } else {
+      console.log("you shouldn't be able to make a new trip");
       }, function myError(response) {
         console.log("edit failed");
       });
     } else {
       console.log("you shouldn't be able to make a new trip");
+
     }
   }
 
@@ -201,12 +226,24 @@ myApp.controller('Controller', ['$scope', '$http', function($scope, $http) {
         var parameter = JSON.stringify(json);
         $http({
             method: 'GET', 
-            url : "/trip-search"
+            url : "/trip-search?tridId=*&depart=*&arriv=*&st1="+firstDay+"&st2="+secondDay
           }).then(function mySuccess(response) {
             console.log("success");
           }, function myError(response) {
             console.log("failure");
           });
+  
+      // $http.get(base+url).success(function(data, status, headers, config) {
+      //   // this callback will be called asynchronously
+      //   // when the response is available
+      //   console.log("success");
+      //   console.log(data);
+      // }).error(function(data, status, headers, config) {
+      //   // called asynchronously if an error occurs
+      //   // or server returns response with an error status.
+      //   console.log("failure");
+      // });
+
     }
   }
 
