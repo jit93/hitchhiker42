@@ -120,17 +120,17 @@ public class Application extends Controller {
 //     }
 
 
-//     public static Result insertIntoIsDrivenBy(int trip_id, String email) throws SQLException {
-//         //check to sanitize inputs
+    public static Result insertIntoIsDrivenBy(String trip_id, String email) throws SQLException {
+        //check to sanitize inputs
 
-
-//         boolean success = hitchhiker42.insertIntoIsDrivenBy(trip_id, email);
-//         if (success) {
-//             return ok(edit.render("success, driver for trip added"));
-//         } else{
-//             return ok(error.render("error try again"));
-//         }
-//     }
+        int trip_id_int = Integer.parseInt(trip_id);
+        boolean success = hitchhiker42.insertIntoIsDrivenBy(trip_id_int, email);
+        if (success) {
+            return ok("success, driver for trip added");
+        } else{
+            return ok(error.render("error try again"));
+        }
+    }
 
 
     public static Result updateIsDrivenBy(String trip_id, String email, boolean delete) throws SQLException {
